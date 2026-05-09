@@ -3,6 +3,7 @@ import { Stack, Typography } from '@mui/material';
 import { listMeters } from '@/features/meters/service';
 import { listProperties } from '@/features/properties/service';
 import { AddReminderDialogButton } from '@/features/reminders/components/AddReminderDialogButton';
+import { GenerateRemindersButton } from '@/features/reminders/components/GenerateRemindersButton';
 import { ReminderList } from '@/features/reminders/components/ReminderList';
 import { listAllReminders } from '@/features/reminders/service';
 import { listMonthlyStatements } from '@/features/statements/service';
@@ -38,24 +39,27 @@ export default async function RemindersPage() {
             custom follow-ups.
           </Typography>
         </Stack>
-        <AddReminderDialogButton
-          properties={properties.map((property) => ({
-            id: property.id,
-            label: property.name,
-          }))}
-          tenants={tenants.map((tenant) => ({
-            id: tenant.id,
-            label: tenant.fullName,
-          }))}
-          statements={statements.map((statement) => ({
-            id: statement.id,
-            label: `${statement.property.name} ${statement.periodMonth}/${statement.periodYear}`,
-          }))}
-          meters={meters.map((meter) => ({
-            id: meter.id,
-            label: `${meter.property.name} · ${meter.name}`,
-          }))}
-        />
+        <Stack direction="row" spacing={1}>
+          <GenerateRemindersButton />
+          <AddReminderDialogButton
+            properties={properties.map((property) => ({
+              id: property.id,
+              label: property.name,
+            }))}
+            tenants={tenants.map((tenant) => ({
+              id: tenant.id,
+              label: tenant.fullName,
+            }))}
+            statements={statements.map((statement) => ({
+              id: statement.id,
+              label: `${statement.property.name} ${statement.periodMonth}/${statement.periodYear}`,
+            }))}
+            meters={meters.map((meter) => ({
+              id: meter.id,
+              label: `${meter.property.name} · ${meter.name}`,
+            }))}
+          />
+        </Stack>
       </Stack>
 
       <ReminderList reminders={reminders} />

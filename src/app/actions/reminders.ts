@@ -5,6 +5,7 @@ import { ReminderStatus } from '@/generated/prisma/client';
 
 import {
   createReminder,
+  generateAutomaticReminders,
   updateReminderStatus,
 } from '@/features/reminders/service';
 import {
@@ -52,6 +53,23 @@ export async function skipReminderAction(reminderId: string) {
 
 export async function cancelReminderAction(reminderId: string) {
   return updateStatus(reminderId, ReminderStatus.CANCELLED);
+}
+
+export async function generateAutomaticRemindersAction() {
+  try {
+    const user = await requireUser();
+    const createdCount = await generateAutomaticReminders(user.id);
+    revalidateReminderPaths();
+
+    return { ok: true, createdCount };
+  } catch (error) {
+    console.error('Unable to generate reminders:', error);
+
+    return {
+      ok: false,
+      formError: getFormError(error, 'Unable to generate reminders.'),
+    };
+  }
 }
 
 async function updateStatus(reminderId: string, status: ReminderStatus) {

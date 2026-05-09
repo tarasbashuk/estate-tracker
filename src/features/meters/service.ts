@@ -5,6 +5,7 @@ import {
 } from '@/generated/prisma/client';
 
 import { db } from '@/lib/db';
+import { createMeterOperationalReminders } from '@/features/reminders/service';
 import type { MeterFormValues, MeterReadingFormValues } from './schemas';
 
 export async function listMetersForProperty(
@@ -50,9 +51,15 @@ export async function createMeter(
   await assertPropertyBelongsToUser(userId, propertyId);
   await assertUtilityTypeAvailableToUser(userId, values.utilityTypeId);
 
-  return db.meter.create({
+  const meter = await db.meter.create({
     data: toMeterData(userId, propertyId, values),
   });
+
+  if (meter.isActive) {
+    await createMeterOperationalReminders(userId, meter.id);
+  }
+
+  return meter;
 }
 
 export async function updateMeter(
@@ -71,13 +78,19 @@ export async function updateMeter(
 
   await assertUtilityTypeAvailableToUser(userId, values.utilityTypeId);
 
-  return db.meter.update({
+  const meter = await db.meter.update({
     where: {
       id: meterId,
       userId,
     },
     data: toMeterData(userId, existing.propertyId, values),
   });
+
+  if (meter.isActive) {
+    await createMeterOperationalReminders(userId, meter.id);
+  }
+
+  return meter;
 }
 
 export async function createMeterReading(

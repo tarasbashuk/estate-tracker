@@ -6,6 +6,7 @@ import {
 } from '@/generated/prisma/client';
 
 import { db } from '@/lib/db';
+import { createStatementPaymentReminders } from '@/features/reminders/service';
 import type { CreateStatementFormValues } from './schemas';
 
 export async function listMonthlyStatements(userId: string) {
@@ -80,7 +81,7 @@ export async function createMonthlyStatement(
     orderBy: [{ utilityType: { name: 'asc' } }],
   });
 
-  return db.monthlyStatement.create({
+  const statement = await db.monthlyStatement.create({
     data: {
       userId,
       propertyId: values.propertyId,
@@ -116,6 +117,10 @@ export async function createMonthlyStatement(
       },
     },
   });
+
+  await createStatementPaymentReminders(userId, statement.id);
+
+  return statement;
 }
 
 export function calculateStatementTotal(
