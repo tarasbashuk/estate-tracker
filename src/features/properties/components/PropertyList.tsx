@@ -50,20 +50,20 @@ export function PropertyList({ properties }: { properties: Property[] }) {
             <TableRow key={property.id} hover>
               <TableCell>
                 <Stack spacing={0.5}>
-                  <Button
-                    component={Link}
-                    href={`/properties/${property.id}`}
-                    sx={{
-                      alignSelf: 'flex-start',
-                      p: 0,
-                      minWidth: 0,
-                      textAlign: 'left',
-                      textTransform: 'none',
-                      fontWeight: 600,
-                    }}
-                  >
-                    {property.name}
-                  </Button>
+                  <Link href={`/properties/${property.id}`}>
+                    <Button
+                      sx={{
+                        alignSelf: 'flex-start',
+                        p: 0,
+                        minWidth: 0,
+                        textAlign: 'left',
+                        textTransform: 'none',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {property.name}
+                    </Button>
+                  </Link>
                   {property.notes ? (
                     <Typography variant="body2" color="text.secondary">
                       {property.notes}

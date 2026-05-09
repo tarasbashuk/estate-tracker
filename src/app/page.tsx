@@ -25,14 +25,11 @@ export default async function HomePage() {
             statements, payments, and operational tasks.
           </Typography>
           {user ? (
-            <Button
-              component={Link}
-              href="/properties"
-              variant="contained"
-              size="large"
-            >
-              Open dashboard
-            </Button>
+            <Link href="/properties">
+              <Button variant="contained" size="large">
+                Open dashboard
+              </Button>
+            </Link>
           ) : (
             <SignInButton mode="modal">
               <Button variant="contained" size="large">

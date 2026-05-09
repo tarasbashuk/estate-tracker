@@ -3,7 +3,7 @@
 import { useEffect, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import {
   Alert,
   Box,
@@ -62,6 +62,7 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
   const [isPending, startTransition] = useTransition();
   const {
     register,
+    control,
     reset,
     setError,
     formState: { errors },
@@ -132,21 +133,28 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
             />
           </Box>
           <Box>
-            <TextField
-              label="Property type"
-              select
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.propertyType)}
-              helperText={errors.propertyType?.message}
-              {...register('propertyType')}
-            >
-              {propertyTypeValues.map((value) => (
-                <MenuItem key={value} value={value}>
-                  {propertyTypeLabels[value]}
-                </MenuItem>
-              ))}
-            </TextField>
+            <Controller
+              name="propertyType"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Property type"
+                  select
+                  fullWidth
+                  disabled={isPending}
+                  error={Boolean(errors.propertyType)}
+                  helperText={errors.propertyType?.message}
+                  {...field}
+                  value={field.value ?? 'APARTMENT'}
+                >
+                  {propertyTypeValues.map((value) => (
+                    <MenuItem key={value} value={value}>
+                      {propertyTypeLabels[value]}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
           </Box>
           <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField

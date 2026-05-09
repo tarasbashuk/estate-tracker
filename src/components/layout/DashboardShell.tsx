@@ -14,12 +14,14 @@ import {
 } from '@mui/material';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 const drawerWidth = 260;
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: <DashboardIcon /> },
   { label: 'Properties', href: '/properties', icon: <ApartmentIcon /> },
+  { label: 'Tenants', href: '/tenants', icon: <GroupsIcon /> },
 ];
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -46,15 +48,12 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <Divider />
         <List sx={{ px: 1 }}>
           {navItems.map((item) => (
-            <ListItemButton
-              key={item.href}
-              component={Link}
-              href={item.href}
-              sx={{ borderRadius: 1, mb: 0.5 }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
+            <Link key={item.href} href={item.href}>
+              <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </Link>
           ))}
         </List>
       </Drawer>

@@ -16,6 +16,7 @@ model User {
   fullName    String?
   imageUrl    String?
   properties  Property[]
+  tenants     Tenant[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
@@ -46,5 +47,32 @@ enum PropertyType {
   APARTMENT
   HOUSE
   COMMERCIAL
+  OTHER
+}
+
+model Tenant {
+  id              String        @id @default(uuid())
+  userId          String
+  fullName        String
+  phone           String?
+  email           String?
+  messengerType   MessengerType @default(OTHER)
+  messengerHandle String?
+  notes           String?
+  isArchived      Boolean       @default(false)
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([userId, isArchived])
+}
+
+enum MessengerType {
+  TELEGRAM
+  WHATSAPP
+  VIBER
+  EMAIL
+  PHONE
   OTHER
 }

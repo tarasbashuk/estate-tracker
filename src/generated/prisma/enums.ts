@@ -17,3 +17,15 @@ export const PropertyType = {
 } as const
 
 export type PropertyType = (typeof PropertyType)[keyof typeof PropertyType]
+
+
+export const MessengerType = {
+  TELEGRAM: 'TELEGRAM',
+  WHATSAPP: 'WHATSAPP',
+  VIBER: 'VIBER',
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE',
+  OTHER: 'OTHER'
+} as const
+
+export type MessengerType = (typeof MessengerType)[keyof typeof MessengerType]

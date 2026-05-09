@@ -59,13 +59,11 @@ export default async function PropertyDetailsPage({
         sx={{ justifyContent: 'space-between' }}
       >
         <Stack spacing={1}>
-          <Button
-            component={Link}
-            href="/properties"
-            sx={{ alignSelf: 'flex-start', p: 0, minWidth: 0 }}
-          >
-            Back to properties
-          </Button>
+          <Link href="/properties">
+            <Button sx={{ alignSelf: 'flex-start', p: 0, minWidth: 0 }}>
+              Back to properties
+            </Button>
+          </Link>
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Typography variant="h4" component="h1">
               {property.name}
@@ -135,4 +133,3 @@ function DetailRow({
     </Stack>
   );
 }
-
