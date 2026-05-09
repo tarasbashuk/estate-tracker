@@ -56,7 +56,9 @@ export const ModelName = {
   Tenant: 'Tenant',
   RentalAgreement: 'RentalAgreement',
   UtilityType: 'UtilityType',
-  PropertyUtilityConfig: 'PropertyUtilityConfig'
+  PropertyUtilityConfig: 'PropertyUtilityConfig',
+  Meter: 'Meter',
+  MeterReading: 'MeterReading'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -175,6 +177,49 @@ export const PropertyUtilityConfigScalarFieldEnum = {
 } as const
 
 export type PropertyUtilityConfigScalarFieldEnum = (typeof PropertyUtilityConfigScalarFieldEnum)[keyof typeof PropertyUtilityConfigScalarFieldEnum]
+
+
+export const MeterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  utilityTypeId: 'utilityTypeId',
+  name: 'name',
+  providerName: 'providerName',
+  accountNumber: 'accountNumber',
+  submissionMethod: 'submissionMethod',
+  submissionUrl: 'submissionUrl',
+  submissionEmail: 'submissionEmail',
+  submissionDayStart: 'submissionDayStart',
+  submissionDayEnd: 'submissionDayEnd',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
+
+
+export const MeterReadingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  meterId: 'meterId',
+  propertyId: 'propertyId',
+  periodMonth: 'periodMonth',
+  periodYear: 'periodYear',
+  previousValue: 'previousValue',
+  currentValue: 'currentValue',
+  consumption: 'consumption',
+  readingReceivedFromTenantAt: 'readingReceivedFromTenantAt',
+  submittedToProviderAt: 'submittedToProviderAt',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
 
 
 export const SortOrder = {

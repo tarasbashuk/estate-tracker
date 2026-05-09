@@ -47,3 +47,13 @@ export type UtilityType = Prisma.UtilityTypeModel
  * 
  */
 export type PropertyUtilityConfig = Prisma.PropertyUtilityConfigModel
+/**
+ * Model Meter
+ * 
+ */
+export type Meter = Prisma.MeterModel
+/**
+ * Model MeterReading
+ * 
+ */
+export type MeterReading = Prisma.MeterReadingModel

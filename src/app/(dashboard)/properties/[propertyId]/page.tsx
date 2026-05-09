@@ -12,6 +12,8 @@ import {
 
 import { PropertyAgreementsSummary } from '@/features/agreements/components/PropertyAgreementsSummary';
 import { listRentalAgreementsForProperty } from '@/features/agreements/service';
+import { PropertyMetersSection } from '@/features/meters/components/PropertyMetersSection';
+import { listMetersForProperty } from '@/features/meters/service';
 import { ArchivePropertyButton } from '@/features/properties/components/ArchivePropertyButton';
 import { EditPropertyForm } from '@/features/properties/components/EditPropertyForm';
 import { getProperty } from '@/features/properties/service';
@@ -46,12 +48,14 @@ export default async function PropertyDetailsPage({
     notFound();
   }
 
-  const [agreements, tenants, utilityConfigs, utilityTypes] = await Promise.all([
-    listRentalAgreementsForProperty(user.id, propertyId),
-    listTenants(user.id),
-    listPropertyUtilityConfigs(user.id, propertyId),
-    listUtilityTypes(user.id),
-  ]);
+  const [agreements, tenants, utilityConfigs, utilityTypes, meters] =
+    await Promise.all([
+      listRentalAgreementsForProperty(user.id, propertyId),
+      listTenants(user.id),
+      listPropertyUtilityConfigs(user.id, propertyId),
+      listUtilityTypes(user.id),
+      listMetersForProperty(user.id, propertyId),
+    ]);
 
   const formDefaults: PropertyFormValues = {
     name: property.name,
@@ -142,6 +146,12 @@ export default async function PropertyDetailsPage({
       <PropertyUtilitiesSection
         propertyId={property.id}
         configs={utilityConfigs}
+        utilityTypes={utilityTypeOptions}
+      />
+
+      <PropertyMetersSection
+        propertyId={property.id}
+        meters={meters}
         utilityTypes={utilityTypeOptions}
       />
 

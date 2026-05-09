@@ -389,7 +389,9 @@ export const ModelName = {
   Tenant: 'Tenant',
   RentalAgreement: 'RentalAgreement',
   UtilityType: 'UtilityType',
-  PropertyUtilityConfig: 'PropertyUtilityConfig'
+  PropertyUtilityConfig: 'PropertyUtilityConfig',
+  Meter: 'Meter',
+  MeterReading: 'MeterReading'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "property" | "tenant" | "rentalAgreement" | "utilityType" | "propertyUtilityConfig"
+    modelProps: "user" | "property" | "tenant" | "rentalAgreement" | "utilityType" | "propertyUtilityConfig" | "meter" | "meterReading"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +855,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Meter: {
+      payload: Prisma.$MeterPayload<ExtArgs>
+      fields: Prisma.MeterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        findFirst: {
+          args: Prisma.MeterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        findMany: {
+          args: Prisma.MeterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        create: {
+          args: Prisma.MeterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        createMany: {
+          args: Prisma.MeterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        delete: {
+          args: Prisma.MeterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        update: {
+          args: Prisma.MeterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        aggregate: {
+          args: Prisma.MeterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeter>
+        }
+        groupBy: {
+          args: Prisma.MeterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterCountAggregateOutputType> | number
+        }
+      }
+    }
+    MeterReading: {
+      payload: Prisma.$MeterReadingPayload<ExtArgs>
+      fields: Prisma.MeterReadingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeterReadingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeterReadingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        findFirst: {
+          args: Prisma.MeterReadingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeterReadingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        findMany: {
+          args: Prisma.MeterReadingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        create: {
+          args: Prisma.MeterReadingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        createMany: {
+          args: Prisma.MeterReadingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeterReadingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        delete: {
+          args: Prisma.MeterReadingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        update: {
+          args: Prisma.MeterReadingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeterReadingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeterReadingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeterReadingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeterReadingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        aggregate: {
+          args: Prisma.MeterReadingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeterReading>
+        }
+        groupBy: {
+          args: Prisma.MeterReadingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterReadingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeterReadingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterReadingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -992,6 +1142,49 @@ export const PropertyUtilityConfigScalarFieldEnum = {
 } as const
 
 export type PropertyUtilityConfigScalarFieldEnum = (typeof PropertyUtilityConfigScalarFieldEnum)[keyof typeof PropertyUtilityConfigScalarFieldEnum]
+
+
+export const MeterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  utilityTypeId: 'utilityTypeId',
+  name: 'name',
+  providerName: 'providerName',
+  accountNumber: 'accountNumber',
+  submissionMethod: 'submissionMethod',
+  submissionUrl: 'submissionUrl',
+  submissionEmail: 'submissionEmail',
+  submissionDayStart: 'submissionDayStart',
+  submissionDayEnd: 'submissionDayEnd',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
+
+
+export const MeterReadingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  meterId: 'meterId',
+  propertyId: 'propertyId',
+  periodMonth: 'periodMonth',
+  periodYear: 'periodYear',
+  previousValue: 'previousValue',
+  currentValue: 'currentValue',
+  consumption: 'consumption',
+  readingReceivedFromTenantAt: 'readingReceivedFromTenantAt',
+  submittedToProviderAt: 'submittedToProviderAt',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1144,6 +1337,34 @@ export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
+ * Reference to a field of type 'SubmissionMethod'
+ */
+export type EnumSubmissionMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'SubmissionMethod[]'
+ */
+export type ListEnumSubmissionMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterReadingStatus'
+ */
+export type EnumMeterReadingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterReadingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterReadingStatus[]'
+ */
+export type ListEnumMeterReadingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterReadingStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1272,6 +1493,8 @@ export type GlobalOmitConfig = {
   rentalAgreement?: Prisma.RentalAgreementOmit
   utilityType?: Prisma.UtilityTypeOmit
   propertyUtilityConfig?: Prisma.PropertyUtilityConfigOmit
+  meter?: Prisma.MeterOmit
+  meterReading?: Prisma.MeterReadingOmit
 }
 
 /* Types for Logging */

@@ -48,3 +48,25 @@ export const Currency = {
 } as const
 
 export type Currency = (typeof Currency)[keyof typeof Currency]
+
+
+export const SubmissionMethod = {
+  WEBSITE: 'WEBSITE',
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE',
+  MESSENGER: 'MESSENGER',
+  IN_PERSON: 'IN_PERSON',
+  OTHER: 'OTHER'
+} as const
+
+export type SubmissionMethod = (typeof SubmissionMethod)[keyof typeof SubmissionMethod]
+
+
+export const MeterReadingStatus = {
+  WAITING_FOR_TENANT: 'WAITING_FOR_TENANT',
+  RECEIVED_FROM_TENANT: 'RECEIVED_FROM_TENANT',
+  SUBMITTED_TO_PROVIDER: 'SUBMITTED_TO_PROVIDER',
+  NOT_REQUIRED: 'NOT_REQUIRED'
+} as const
+
+export type MeterReadingStatus = (typeof MeterReadingStatus)[keyof typeof MeterReadingStatus]

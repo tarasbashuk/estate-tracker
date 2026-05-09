@@ -15,13 +15,15 @@ model User {
   lastName    String?
   fullName    String?
   imageUrl    String?
-  properties  Property[]
-  tenants     Tenant[]
-  agreements  RentalAgreement[]
-  utilityTypes UtilityType[]
+  properties    Property[]
+  tenants       Tenant[]
+  agreements    RentalAgreement[]
+  utilityTypes  UtilityType[]
   utilityConfigs PropertyUtilityConfig[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  meters        Meter[]
+  meterReadings MeterReading[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 }
 
 model Property {
@@ -41,8 +43,10 @@ model Property {
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   agreements   RentalAgreement[]
   utilityConfigs PropertyUtilityConfig[]
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  meters         Meter[]
+  meterReadings  MeterReading[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 
   @@index([userId])
   @@index([userId, isArchived])
@@ -130,6 +134,7 @@ model UtilityType {
   isSystem    Boolean                 @default(false)
   user        User?                   @relation(fields: [userId], references: [id], onDelete: Cascade)
   configs     PropertyUtilityConfig[]
+  meters      Meter[]
   createdAt   DateTime                @default(now())
   updatedAt   DateTime                @updatedAt
 
@@ -155,4 +160,75 @@ model PropertyUtilityConfig {
   @@index([userId])
   @@index([propertyId])
   @@index([utilityTypeId])
+}
+
+model Meter {
+  id                 String           @id @default(uuid())
+  userId             String
+  propertyId         String
+  utilityTypeId      String
+  name               String
+  providerName       String?
+  accountNumber      String?
+  submissionMethod   SubmissionMethod @default(OTHER)
+  submissionUrl      String?
+  submissionEmail    String?
+  submissionDayStart Int?
+  submissionDayEnd   Int?
+  notes              String?
+  isActive           Boolean          @default(true)
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property           Property         @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  utilityType        UtilityType      @relation(fields: [utilityTypeId], references: [id], onDelete: Restrict)
+  readings           MeterReading[]
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@index([userId])
+  @@index([propertyId])
+  @@index([utilityTypeId])
+  @@index([propertyId, isActive])
+}
+
+model MeterReading {
+  id                           String             @id @default(uuid())
+  userId                       String
+  meterId                      String
+  propertyId                   String
+  periodMonth                  Int
+  periodYear                   Int
+  previousValue                Decimal?           @db.Decimal(12, 3)
+  currentValue                 Decimal?           @db.Decimal(12, 3)
+  consumption                  Decimal?           @db.Decimal(12, 3)
+  readingReceivedFromTenantAt  DateTime?
+  submittedToProviderAt        DateTime?
+  status                       MeterReadingStatus @default(WAITING_FOR_TENANT)
+  notes                        String?
+  user                         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  meter                        Meter              @relation(fields: [meterId], references: [id], onDelete: Cascade)
+  property                     Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt                    DateTime           @default(now())
+  updatedAt                    DateTime           @updatedAt
+
+  @@unique([meterId, periodMonth, periodYear])
+  @@index([userId])
+  @@index([propertyId])
+  @@index([meterId])
+  @@index([periodYear, periodMonth])
+}
+
+enum SubmissionMethod {
+  WEBSITE
+  EMAIL
+  PHONE
+  MESSENGER
+  IN_PERSON
+  OTHER
+}
+
+enum MeterReadingStatus {
+  WAITING_FOR_TENANT
+  RECEIVED_FROM_TENANT
+  SUBMITTED_TO_PROVIDER
+  NOT_REQUIRED
 }

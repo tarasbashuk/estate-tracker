@@ -324,6 +324,40 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
+export type EnumSubmissionMethodFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubmissionMethod | Prisma.EnumSubmissionMethodFieldRefInput<$PrismaModel>
+  in?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel> | $Enums.SubmissionMethod
+}
+
+export type EnumSubmissionMethodWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubmissionMethod | Prisma.EnumSubmissionMethodFieldRefInput<$PrismaModel>
+  in?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubmissionMethodWithAggregatesFilter<$PrismaModel> | $Enums.SubmissionMethod
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel>
+}
+
+export type EnumMeterReadingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MeterReadingStatus | Prisma.EnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel> | $Enums.MeterReadingStatus
+}
+
+export type EnumMeterReadingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MeterReadingStatus | Prisma.EnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMeterReadingStatusWithAggregatesFilter<$PrismaModel> | $Enums.MeterReadingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -645,6 +679,40 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type NestedEnumSubmissionMethodFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubmissionMethod | Prisma.EnumSubmissionMethodFieldRefInput<$PrismaModel>
+  in?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel> | $Enums.SubmissionMethod
+}
+
+export type NestedEnumSubmissionMethodWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubmissionMethod | Prisma.EnumSubmissionMethodFieldRefInput<$PrismaModel>
+  in?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubmissionMethod[] | Prisma.ListEnumSubmissionMethodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubmissionMethodWithAggregatesFilter<$PrismaModel> | $Enums.SubmissionMethod
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSubmissionMethodFilter<$PrismaModel>
+}
+
+export type NestedEnumMeterReadingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MeterReadingStatus | Prisma.EnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel> | $Enums.MeterReadingStatus
+}
+
+export type NestedEnumMeterReadingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MeterReadingStatus | Prisma.EnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MeterReadingStatus[] | Prisma.ListEnumMeterReadingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMeterReadingStatusWithAggregatesFilter<$PrismaModel> | $Enums.MeterReadingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMeterReadingStatusFilter<$PrismaModel>
 }
 
 
