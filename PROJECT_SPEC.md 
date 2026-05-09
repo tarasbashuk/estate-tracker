@@ -1,0 +1,1716 @@
+# Estate Tracker — Project Specification
+
+## How to use these docs with an AI coding agent
+
+This document is designed as a master project specification for building **Estate Tracker**, a private rental property management app.
+
+Recommended workflow:
+
+1. Give the agent the whole `PROJECT_SPEC.md` first.
+2. Ask the agent to summarize the product, architecture, entities, and MVP scope.
+3. Ask the agent to analyze the existing Expense Tracker app as a reference implementation.
+4. Ask the agent to create or update separate docs from this master file:
+
+   * `docs/PRODUCT_BRIEF.md`
+   * `docs/MVP_SCOPE.md`
+   * `docs/DOMAIN_MODEL.md`
+   * `docs/USER_FLOWS.md`
+   * `docs/DATABASE_SCHEMA.md`
+   * `docs/IMPLEMENTATION_PLAN.md`
+   * `docs/AGENT_RULES.md`
+5. Implement the app step by step. Do not ask the agent to build the whole app in one task.
+
+Recommended order for the agent:
+
+```txt
+1. Read PROJECT_SPEC.md
+2. Analyze the existing Expense Tracker app
+3. Produce ARCHITECTURE_REVIEW.md
+4. Confirm the final tech stack
+5. Implement database schema
+6. Implement authenticated layout
+7. Implement Properties CRUD
+8. Implement Tenants CRUD
+9. Implement Rental Agreements
+10. Implement Utility Configuration and Meters
+11. Implement Monthly Statements
+12. Implement Payments
+13. Implement PDF generation
+14. Implement dashboard and reminders
+```
+
+---
+
+# 1. Product brief
+
+## Product name
+
+**Estate Tracker**
+
+## Product idea
+
+Estate Tracker is a private web application for managing rental properties, tenants, rental agreements, monthly rent, utility compensation, meter readings, payment tracking, and PDF summaries for tenants.
+
+The main goal is to replace the current Excel-based workflow with a structured, searchable, and reliable system.
+
+## Primary user
+
+The initial user is the property owner/admin. The app is private and single-user-first, but the data model should not block future multi-user support.
+
+## Main problem
+
+The current rental property management flow is manual and spread across Excel, messengers, emails, websites, and memory. The owner needs to:
+
+* track several properties;
+* track active and historical rental agreements;
+* remind tenants to send meter readings;
+* record meter readings;
+* submit meter readings to utility providers, housing offices, or provider websites;
+* calculate rent and utility compensation;
+* generate a clear monthly summary for tenants;
+* send the summary through Telegram, WhatsApp, or another messenger;
+* track separate and partial payments;
+* know what is unpaid, overdue, or waiting for action.
+
+## MVP goal
+
+Replace the existing Excel-based process for rental payments, utility compensation, meter readings, and payment status tracking.
+
+## Non-goals for MVP
+
+The MVP should not include:
+
+* native mobile app;
+* automatic WhatsApp or Telegram sending;
+* automatic utility provider API integrations;
+* automatic bank transaction matching;
+* OCR parsing of bills;
+* multi-user organization management;
+* complex accounting reports;
+* public tenant portal;
+* subscription billing;
+* role-based access control beyond the authenticated owner.
+
+---
+
+# 2. Suggested tech stack
+
+The app should reuse the existing approach from the Expense Tracker app where possible.
+
+Recommended stack:
+
+```txt
+Next.js
+TypeScript
+Material UI
+Clerk
+Neon PostgreSQL
+Prisma or Drizzle
+Zod
+React Hook Form or React Final Form
+PDF generation library
+Monobank currency API
+```
+
+## Preferred architecture
+
+The app should be a monolithic Next.js app with feature-based organization.
+
+Suggested structure:
+
+```txt
+/app
+  /(public)
+  /(dashboard)
+    /properties
+    /properties/[propertyId]
+    /tenants
+    /statements
+    /payments
+    /reminders
+    /settings
+
+/features
+  /properties
+  /tenants
+  /rental-agreements
+  /utilities
+  /meters
+  /statements
+  /payments
+  /reminders
+  /currency
+  /pdf
+
+/components
+  /layout
+  /forms
+  /feedback
+  /data-display
+
+/server
+  /db
+  /repositories
+  /services
+
+/lib
+  /formatters
+  /validation
+  /dates
+  /money
+```
+
+---
+
+# 3. Existing Expense Tracker app analysis
+
+The agent should analyze the existing Expense Tracker app before implementation.
+
+## Goal of analysis
+
+The existing app should be treated as a reference implementation, not as a source for direct business-logic copy-paste.
+
+The agent should inspect:
+
+```txt
+- Clerk authentication setup
+- Neon database connection
+- ORM setup
+- project structure
+- routing approach
+- Material UI theme and layout
+- form patterns
+- validation patterns
+- server actions or API routes
+- currency rate integration
+- PDF/export utilities if any
+- environment variables
+- deployment setup
+- error handling patterns
+```
+
+## Required output from agent
+
+The agent should create:
+
+```txt
+ARCHITECTURE_REVIEW.md
+```
+
+This file should include:
+
+```txt
+- existing architecture summary
+- reusable patterns
+- patterns to avoid
+- recommended Estate Tracker structure
+- setup steps
+- implementation risks
+```
+
+Important instruction:
+
+```txt
+Analyze the existing Expense Tracker app only to identify reusable architecture patterns, setup, UI conventions, authentication/database integration, and coding style. Do not copy expense-specific business logic unless it is clearly reusable.
+```
+
+---
+
+# 4. Core domain concepts
+
+## Property
+
+A real estate object managed by the owner.
+
+Examples:
+
+```txt
+Apartment in Kyiv
+House in Lviv
+Commercial unit
+```
+
+A property can have:
+
+* address;
+* characteristics;
+* utility configuration;
+* meters;
+* active rental agreement;
+* historical rental agreements;
+* monthly statements;
+* reminders;
+* notes.
+
+## Tenant
+
+A person or party renting a property.
+
+A tenant can have:
+
+* name;
+* phone;
+* email;
+* messenger preference;
+* notes;
+* current or historical rental agreements.
+
+## Rental Agreement
+
+A rental contract between owner and tenant for a specific property.
+
+The app should support historical agreements, because one property can have different tenants across time.
+
+## Utility Type
+
+A configurable type of utility or recurring charge.
+
+Examples:
+
+```txt
+Electricity
+Cold water
+Hot water
+Heating
+Internet
+Concierge
+Building maintenance
+Gas
+Security
+Waste collection
+Other
+```
+
+Utility types should not be hardcoded as database columns on the monthly statement.
+
+## Property Utility Configuration
+
+Defines which utilities are enabled for a specific property.
+
+Example:
+
+```txt
+Property A:
+- Electricity: enabled
+- Cold water: enabled
+- Hot water: disabled
+- Heating: disabled
+- Concierge: enabled
+- Internet: enabled
+```
+
+## Meter
+
+A utility meter or provider account connected to a property and utility type.
+
+Examples:
+
+```txt
+Electricity meter
+Cold water meter
+Hot water meter
+Gas meter
+```
+
+A meter can have:
+
+* provider name;
+* account number;
+* submission method;
+* submission website;
+* submission email;
+* normal submission day or range;
+* notes.
+
+## Meter Reading
+
+A monthly reading for a specific meter.
+
+The app should track:
+
+* previous value;
+* current value;
+* consumption;
+* whether the tenant sent the reading;
+* whether the owner submitted it to the provider;
+* date of submission;
+* notes.
+
+## Monthly Statement
+
+A monthly summary for a specific property, tenant, and rental agreement.
+
+It includes:
+
+* rent amount;
+* utility charges;
+* total amount due;
+* due date;
+* status;
+* payment progress;
+* PDF generation.
+
+Important naming note:
+
+Avoid calling this an `Invoice` in the app unless legally required. Prefer:
+
+```txt
+Monthly Statement
+Payment Summary
+Monthly Summary
+Розрахунок за місяць
+```
+
+## Monthly Statement Item
+
+An individual charge row inside a monthly statement.
+
+Examples:
+
+```txt
+Rent
+Electricity
+Cold water
+Internet
+Concierge
+```
+
+This makes the app flexible and avoids database changes when a new utility type is needed.
+
+## Payment
+
+A real payment received from the tenant.
+
+Payments are separate entities because:
+
+* rent and utilities can be paid separately;
+* payments can be partial;
+* one statement can have multiple payments;
+* one payment may cover rent, utilities, deposit, or other charge types.
+
+Important payment modeling rule:
+
+```txt
+Do not use paymentType = PARTIAL.
+```
+
+Partial payment is not a payment type. Partiality is calculated by comparing expected amount and actual received amount.
+
+Correct approach:
+
+```txt
+paymentCategory = RENT | UTILITIES | DEPOSIT | MIXED | OTHER
+```
+
+Examples:
+
+```txt
+Payment 1:
+- amount: 10000 UAH
+- paymentCategory: RENT
+- this is partial rent if expected rent is 18000 UAH
+
+Payment 2:
+- amount: 8000 UAH
+- paymentCategory: RENT
+- rent is now fully paid
+
+Payment 3:
+- amount: 2430 UAH
+- paymentCategory: UTILITIES
+- utilities are paid separately
+```
+
+The statement status should be derived from payment totals.
+
+---
+
+# 5. MVP modules
+
+## Module 1 — Authentication and layout
+
+The user should be able to sign in with Clerk and access the protected dashboard.
+
+MVP requirements:
+
+```txt
+- Clerk authentication
+- protected dashboard routes
+- app shell with sidebar
+- responsive layout
+- current user data linked to local database user record
+```
+
+## Module 2 — Properties
+
+MVP requirements:
+
+```txt
+- create property
+- edit property
+- delete/archive property
+- list properties
+- view property details
+```
+
+Property fields:
+
+```txt
+name
+addressLine1
+addressLine2
+city
+country
+postalCode
+area
+rooms
+propertyType
+notes
+isArchived
+createdAt
+updatedAt
+```
+
+## Module 3 — Tenants
+
+MVP requirements:
+
+```txt
+- create tenant
+- edit tenant
+- list tenants
+- view tenant details
+- connect tenant to rental agreement
+```
+
+Tenant fields:
+
+```txt
+fullName
+phone
+email
+messengerType
+messengerHandle
+notes
+isArchived
+createdAt
+updatedAt
+```
+
+Messenger types:
+
+```txt
+TELEGRAM
+WHATSAPP
+VIBER
+EMAIL
+PHONE
+OTHER
+```
+
+## Module 4 — Rental Agreements
+
+MVP requirements:
+
+```txt
+- create rental agreement from property page
+- select or create tenant
+- store agreement dates
+- store monthly rent
+- store payment due day
+- store deposit info
+- show current active agreement
+- show agreement history
+```
+
+Rental agreement fields:
+
+```txt
+propertyId
+tenantId
+startDate
+endDate
+status
+monthlyRentAmount
+monthlyRentCurrency
+paymentDueDay
+depositAmount
+depositCurrency
+notes
+createdAt
+updatedAt
+```
+
+Agreement statuses:
+
+```txt
+DRAFT
+ACTIVE
+ENDED
+CANCELLED
+```
+
+Business rule:
+
+```txt
+Only one rental agreement should be active for a property at the same time.
+```
+
+## Module 5 — Utility Configuration
+
+MVP requirements:
+
+```txt
+- default system utility types
+- custom utility types
+- enable/disable utility types per property
+- optional default amount
+- optional notes
+```
+
+Default utility types:
+
+```txt
+Rent
+Electricity
+Cold water
+Hot water
+Heating
+Gas
+Internet
+Concierge
+Building maintenance
+Security
+Waste collection
+Other
+```
+
+Important:
+
+Rent may be represented as a statement item, but it is not configured as a property utility in the same way as electricity or water.
+
+## Module 6 — Meters and Meter Readings
+
+MVP requirements:
+
+```txt
+- create meter for property
+- connect meter to utility type
+- store provider information
+- store submission method
+- store monthly readings
+- track whether reading was received from tenant
+- track whether reading was submitted to provider
+```
+
+Meter fields:
+
+```txt
+propertyId
+utilityTypeId
+name
+providerName
+accountNumber
+submissionMethod
+submissionUrl
+submissionEmail
+submissionDayStart
+submissionDayEnd
+notes
+isActive
+createdAt
+updatedAt
+```
+
+Submission methods:
+
+```txt
+WEBSITE
+EMAIL
+PHONE
+MESSENGER
+IN_PERSON
+OTHER
+```
+
+Meter reading fields:
+
+```txt
+meterId
+propertyId
+periodMonth
+periodYear
+previousValue
+currentValue
+consumption
+readingReceivedFromTenantAt
+submittedToProviderAt
+status
+notes
+createdAt
+updatedAt
+```
+
+Meter reading statuses:
+
+```txt
+WAITING_FOR_TENANT
+RECEIVED_FROM_TENANT
+SUBMITTED_TO_PROVIDER
+NOT_REQUIRED
+```
+
+## Module 7 — Monthly Statements
+
+MVP requirements:
+
+```txt
+- create monthly statement for property and period
+- prefill active rental agreement
+- prefill rent row
+- prefill utility rows based on enabled property utilities
+- allow manual utility amount input
+- calculate rent total
+- calculate utility total
+- calculate grand total
+- show payment progress
+- generate PDF
+- copy tenant message
+```
+
+Monthly statement fields:
+
+```txt
+propertyId
+rentalAgreementId
+tenantId
+periodMonth
+periodYear
+rentAmount
+rentCurrency
+utilitiesAmount
+totalAmount
+totalCurrency
+dueDate
+status
+notes
+createdAt
+updatedAt
+```
+
+Statement statuses:
+
+```txt
+DRAFT
+READY_TO_SEND
+SENT
+UNPAID
+PARTIALLY_PAID
+PAID
+OVERPAID
+OVERDUE
+CANCELLED
+```
+
+Status rules:
+
+```txt
+DRAFT — statement is being edited
+READY_TO_SEND — statement is complete but not sent
+SENT — statement was sent or manually marked as sent
+UNPAID — total paid amount is 0 and due date is not passed
+PARTIALLY_PAID — total paid amount is greater than 0 but less than total amount
+PAID — total paid amount equals total amount
+OVERPAID — total paid amount is greater than total amount
+OVERDUE — due date passed and total paid amount is less than total amount
+CANCELLED — statement should not be collected
+```
+
+The app may calculate payment-based statuses dynamically instead of storing them permanently.
+
+## Module 8 — Statement Items
+
+Statement item fields:
+
+```txt
+statementId
+utilityTypeId
+itemType
+label
+amount
+currency
+notes
+sortOrder
+createdAt
+updatedAt
+```
+
+Item types:
+
+```txt
+RENT
+UTILITY
+CUSTOM
+DISCOUNT
+ADJUSTMENT
+```
+
+Examples:
+
+```txt
+Rent — 18000 UAH
+Electricity — 650 UAH
+Cold water — 210 UAH
+Internet — 300 UAH
+Concierge — 500 UAH
+```
+
+## Module 9 — Payments
+
+MVP requirements:
+
+```txt
+- add payment to statement
+- support multiple payments per statement
+- support rent and utility payments separately
+- support partial payments naturally
+- show remaining balance
+- show rent paid amount
+- show utilities paid amount
+- show payment history
+```
+
+Payment fields:
+
+```txt
+statementId
+propertyId
+tenantId
+rentalAgreementId
+amount
+currency
+paymentDate
+paymentCategory
+paymentMethod
+notes
+createdAt
+updatedAt
+```
+
+Payment categories:
+
+```txt
+RENT
+UTILITIES
+DEPOSIT
+MIXED
+OTHER
+```
+
+Payment methods:
+
+```txt
+BANK_TRANSFER
+CASH
+CARD
+OTHER
+```
+
+Important rule:
+
+```txt
+There is no PARTIAL payment category.
+Partial payment is derived from the amount paid compared to the expected amount.
+```
+
+Examples:
+
+```txt
+Expected rent: 18000 UAH
+Payment: 10000 UAH, category RENT
+Result: rent is partially paid
+
+Expected utilities: 2430 UAH
+Payment: 2430 UAH, category UTILITIES
+Result: utilities are fully paid
+```
+
+## Module 10 — Reminders and Tasks
+
+MVP requirements:
+
+```txt
+- show reminders/tasks on dashboard
+- create automatic monthly tasks where possible
+- manually mark task as done
+- support tenant meter reading reminder
+- support provider meter reading submission reminder
+- support rent payment due reminder
+- support utility payment due reminder
+```
+
+Reminder fields:
+
+```txt
+propertyId
+tenantId
+statementId
+meterId
+type
+title
+description
+dueDate
+status
+completedAt
+createdAt
+updatedAt
+```
+
+Reminder types:
+
+```txt
+REQUEST_METER_READINGS_FROM_TENANT
+SUBMIT_METER_READINGS_TO_PROVIDER
+RENT_PAYMENT_DUE
+UTILITIES_PAYMENT_DUE
+CUSTOM
+```
+
+Reminder statuses:
+
+```txt
+OPEN
+DONE
+SKIPPED
+CANCELLED
+```
+
+MVP reminder behavior:
+
+```txt
+- show reminders in dashboard
+- do not send automatic emails in the first version
+- provide copyable reminder message templates
+```
+
+Future reminder behavior:
+
+```txt
+- email reminders to owner
+- optional email reminders to tenants
+- scheduled reminders
+- integration with Telegram/WhatsApp later
+```
+
+## Module 11 — PDF Generation
+
+MVP requirements:
+
+```txt
+- generate PDF for a monthly statement
+- include property info
+- include tenant info
+- include period
+- include rent amount
+- include utility rows
+- include total amount
+- include payment due date
+- include payment instructions or notes
+```
+
+Suggested PDF structure:
+
+```txt
+Monthly Payment Summary
+
+Property:
+Address:
+Tenant:
+Period:
+Due date:
+
+Charges:
+- Rent
+- Electricity
+- Cold water
+- Internet
+- Concierge
+
+Total rent:
+Total utilities:
+Total due:
+
+Payment notes:
+```
+
+The PDF should be clean, simple, and messenger-friendly.
+
+## Module 12 — Copy Message
+
+MVP requirements:
+
+```txt
+- generate a short message for tenant
+- copy message to clipboard
+- message should summarize rent, utilities, total, and due date
+```
+
+Example:
+
+```txt
+Добрий день! Надсилаю розрахунок за травень 2026.
+
+Оренда: 18 000 грн
+Комунальні: 2 430 грн
+Разом до оплати: 20 430 грн
+
+Деталі у PDF.
+Дякую!
+```
+
+---
+
+# 6. Main user flows
+
+## Flow 1 — Create property
+
+```txt
+1. User opens Properties page
+2. User clicks Add Property
+3. User enters address and characteristics
+4. User saves property
+5. Property appears in the list
+```
+
+## Flow 2 — Configure utilities
+
+```txt
+1. User opens property details
+2. User opens Utilities tab
+3. User enables utilities for this property
+4. User optionally adds custom utility type
+5. User saves configuration
+```
+
+## Flow 3 — Configure meters
+
+```txt
+1. User opens property details
+2. User opens Meters tab
+3. User adds electricity/water/gas meters
+4. User enters provider details and submission method
+5. User saves meter configuration
+```
+
+## Flow 4 — Create tenant
+
+```txt
+1. User opens Tenants page or property agreement form
+2. User creates tenant
+3. User enters contact information
+4. User saves tenant
+```
+
+## Flow 5 — Create rental agreement
+
+```txt
+1. User opens property details
+2. User clicks Create Rental Agreement
+3. User selects tenant
+4. User enters dates, rent, currency, deposit, payment due day
+5. User saves agreement
+6. Agreement becomes active
+```
+
+## Flow 6 — Monthly cycle
+
+```txt
+1. Dashboard shows that meter readings should be requested
+2. User copies reminder message and sends it to tenant
+3. Tenant sends readings manually via messenger
+4. User enters readings in Estate Tracker
+5. User marks readings as received from tenant
+6. User submits readings to provider website/email
+7. User marks readings as submitted to provider
+8. User receives utility amounts
+9. User creates monthly statement
+10. User enters utility amounts
+11. App calculates total amount due
+12. User generates PDF
+13. User copies message and sends PDF to tenant
+14. User records payments when they arrive
+15. Statement becomes paid when full amount is received
+```
+
+## Flow 7 — Record separate rent and utility payments
+
+```txt
+1. User opens monthly statement
+2. User clicks Add Payment
+3. User records rent payment with category RENT
+4. User records utilities payment with category UTILITIES
+5. App shows paid amount and remaining balance
+6. App updates statement status
+```
+
+## Flow 8 — Partial rent payment
+
+```txt
+1. Expected rent is 18000 UAH
+2. Tenant pays 10000 UAH
+3. User records payment category RENT amount 10000 UAH
+4. App shows rent remaining balance 8000 UAH
+5. Statement status becomes PARTIALLY_PAID
+6. Tenant later pays 8000 UAH
+7. User records second payment category RENT amount 8000 UAH
+8. App shows rent as paid
+```
+
+---
+
+# 7. Dashboard requirements
+
+The dashboard should show both financial and operational tasks.
+
+## Dashboard cards
+
+```txt
+Active properties
+Active rental agreements
+Unpaid statements
+Partially paid statements
+Overdue statements
+Pending meter readings
+Readings to submit to providers
+Expected income this month
+Received this month
+Outstanding this month
+```
+
+## Dashboard sections
+
+```txt
+1. Payment overview
+2. Current month statements
+3. Pending reminders/tasks
+4. Upcoming due dates
+5. Properties summary
+```
+
+## Task examples
+
+```txt
+Request electricity reading from tenant for Apartment A
+Submit cold water reading to provider for Apartment B
+Rent payment due in 3 days for Apartment C
+Utilities payment overdue for Apartment D
+```
+
+---
+
+# 8. Currency and exchange rates
+
+## Supported currencies for MVP
+
+```txt
+UAH
+USD
+EUR
+```
+
+## Currency requirements
+
+The app should support:
+
+```txt
+- rent in UAH, USD, or EUR
+- utilities mostly in UAH
+- deposit in UAH, USD, or EUR
+- statement total in selected currency
+- optional exchange rate support
+```
+
+## Monobank API
+
+The app may fetch exchange rates from Monobank API.
+
+Important rule:
+
+```txt
+When exchange rate is used for a statement, store the rate on the statement.
+```
+
+Reason:
+
+Historical statements must remain stable and should not change when today's exchange rate changes.
+
+Suggested exchange rate fields:
+
+```txt
+exchangeRateSource
+exchangeRateDate
+usdToUahRate
+eurToUahRate
+```
+
+Exchange rate sources:
+
+```txt
+MANUAL
+MONOBANK
+NONE
+```
+
+---
+
+# 9. Suggested database schema draft
+
+This is a conceptual schema. The agent should adapt it to Prisma or Drizzle.
+
+```ts
+User {
+  id
+  clerkUserId
+  email
+  createdAt
+  updatedAt
+}
+
+Property {
+  id
+  userId
+  name
+  addressLine1
+  addressLine2
+  city
+  country
+  postalCode
+  area
+  rooms
+  propertyType
+  notes
+  isArchived
+  createdAt
+  updatedAt
+}
+
+Tenant {
+  id
+  userId
+  fullName
+  phone
+  email
+  messengerType
+  messengerHandle
+  notes
+  isArchived
+  createdAt
+  updatedAt
+}
+
+RentalAgreement {
+  id
+  userId
+  propertyId
+  tenantId
+  startDate
+  endDate
+  status
+  monthlyRentAmount
+  monthlyRentCurrency
+  paymentDueDay
+  depositAmount
+  depositCurrency
+  notes
+  createdAt
+  updatedAt
+}
+
+UtilityType {
+  id
+  userId
+  name
+  category
+  isSystem
+  createdAt
+  updatedAt
+}
+
+PropertyUtilityConfig {
+  id
+  propertyId
+  utilityTypeId
+  isEnabled
+  defaultAmount
+  notes
+  createdAt
+  updatedAt
+}
+
+Meter {
+  id
+  propertyId
+  utilityTypeId
+  name
+  providerName
+  accountNumber
+  submissionMethod
+  submissionUrl
+  submissionEmail
+  submissionDayStart
+  submissionDayEnd
+  notes
+  isActive
+  createdAt
+  updatedAt
+}
+
+MeterReading {
+  id
+  meterId
+  propertyId
+  periodMonth
+  periodYear
+  previousValue
+  currentValue
+  consumption
+  readingReceivedFromTenantAt
+  submittedToProviderAt
+  status
+  notes
+  createdAt
+  updatedAt
+}
+
+MonthlyStatement {
+  id
+  userId
+  propertyId
+  rentalAgreementId
+  tenantId
+  periodMonth
+  periodYear
+  rentAmount
+  rentCurrency
+  utilitiesAmount
+  totalAmount
+  totalCurrency
+  dueDate
+  status
+  exchangeRateSource
+  exchangeRateDate
+  usdToUahRate
+  eurToUahRate
+  notes
+  createdAt
+  updatedAt
+}
+
+MonthlyStatementItem {
+  id
+  statementId
+  utilityTypeId
+  itemType
+  label
+  amount
+  currency
+  notes
+  sortOrder
+  createdAt
+  updatedAt
+}
+
+Payment {
+  id
+  statementId
+  propertyId
+  tenantId
+  rentalAgreementId
+  amount
+  currency
+  paymentDate
+  paymentCategory
+  paymentMethod
+  notes
+  createdAt
+  updatedAt
+}
+
+Reminder {
+  id
+  propertyId
+  tenantId
+  statementId
+  meterId
+  type
+  title
+  description
+  dueDate
+  status
+  completedAt
+  createdAt
+  updatedAt
+}
+```
+
+---
+
+# 10. Implementation plan
+
+## Epic 1 — Project setup
+
+```txt
+1. Initialize Next.js app
+2. Configure TypeScript
+3. Configure Material UI
+4. Configure Clerk
+5. Configure Neon database
+6. Configure ORM
+7. Create protected dashboard layout
+8. Add base navigation
+```
+
+## Epic 2 — Existing app architecture review
+
+```txt
+1. Analyze Expense Tracker app
+2. Document reusable patterns
+3. Identify preferred project structure
+4. Identify auth/db setup
+5. Produce ARCHITECTURE_REVIEW.md
+```
+
+## Epic 3 — Properties
+
+```txt
+1. Add Property model
+2. Add property repository/service
+3. Add property list page
+4. Add create property form
+5. Add edit property form
+6. Add property details page
+```
+
+## Epic 4 — Tenants
+
+```txt
+1. Add Tenant model
+2. Add tenant list page
+3. Add create/edit tenant form
+4. Add tenant details page
+```
+
+## Epic 5 — Rental agreements
+
+```txt
+1. Add RentalAgreement model
+2. Add create agreement flow
+3. Connect agreement to property and tenant
+4. Show active agreement on property page
+5. Show agreement history
+6. Prevent multiple active agreements for same property
+```
+
+## Epic 6 — Utility configuration
+
+```txt
+1. Add UtilityType model
+2. Seed default utility types
+3. Add PropertyUtilityConfig model
+4. Add utilities tab on property details page
+5. Add custom utility type support
+```
+
+## Epic 7 — Meters and readings
+
+```txt
+1. Add Meter model
+2. Add MeterReading model
+3. Add meters tab on property details page
+4. Add meter reading form
+5. Add reading status management
+6. Add provider submission tracking
+```
+
+## Epic 8 — Monthly statements
+
+```txt
+1. Add MonthlyStatement model
+2. Add MonthlyStatementItem model
+3. Add create monthly statement flow
+4. Prefill rent from active agreement
+5. Prefill utility rows from property config
+6. Add statement editor
+7. Add total calculation
+8. Add statement list and filters
+```
+
+## Epic 9 — Payments
+
+```txt
+1. Add Payment model
+2. Add payment form
+3. Support RENT and UTILITIES categories
+4. Support multiple payments per statement
+5. Calculate paid amount and remaining balance
+6. Calculate payment status
+7. Show payment history
+```
+
+## Epic 10 — PDF and copy message
+
+```txt
+1. Create PDF template
+2. Generate PDF from statement
+3. Add download PDF action
+4. Add copy message action
+5. Add message template
+```
+
+## Epic 11 — Dashboard and reminders
+
+```txt
+1. Add Reminder model
+2. Generate manual reminders for meter readings and due payments
+3. Show reminders on dashboard
+4. Add mark as done action
+5. Show overdue and upcoming items
+```
+
+## Epic 12 — Currency rates
+
+```txt
+1. Add currency enum
+2. Add Monobank exchange rate service
+3. Cache exchange rates
+4. Store rate on statement
+5. Add manual exchange rate override
+```
+
+---
+
+# 11. AI agent rules
+
+The coding agent must follow these rules.
+
+## General rules
+
+```txt
+- Do not implement the whole app in one step.
+- Always work in small, reviewable tasks.
+- Prefer simple MVP implementation over over-engineering.
+- Reuse patterns from the existing Expense Tracker app where appropriate.
+- Keep business logic separated from UI where possible.
+- Add type-safe validation for forms.
+- Do not hardcode user-specific data.
+- Do not add paid third-party services without approval.
+```
+
+## Database rules
+
+```txt
+- Every user-owned entity must be scoped by userId where appropriate.
+- Do not expose data across users.
+- Avoid hardcoded utility columns on statements.
+- Use StatementItems for flexible charge rows.
+- Use Payment as a separate entity from MonthlyStatement.
+- Do not use paymentCategory = PARTIAL.
+- Calculate partial payment status based on expected vs paid amount.
+```
+
+## UI rules
+
+```txt
+- Use Material UI.
+- Keep UI clean and practical.
+- Prefer tables for lists and tabs for property details.
+- Use clear status chips.
+- Make primary flows obvious.
+- Keep forms simple.
+- Optimize for desktop first, but keep layout responsive.
+```
+
+## MVP discipline
+
+Do not implement these until core MVP is working:
+
+```txt
+- automatic provider API integrations
+- WhatsApp or Telegram sending
+- OCR
+- bank transaction matching
+- native mobile app
+- advanced analytics
+- multi-user organization features
+```
+
+---
+
+# 12. First prompts for AI agent
+
+## Prompt 1 — Analyze existing Expense Tracker app
+
+```txt
+Please analyze my existing Expense Tracker app as a reference implementation for a new app called Estate Tracker.
+
+Focus on:
+- project structure
+- Clerk authentication setup
+- Neon/PostgreSQL setup
+- ORM setup
+- Material UI setup
+- routing patterns
+- forms and validation
+- server actions or API routes
+- currency rate integration
+- reusable utilities
+- deployment/environment setup
+
+Create ARCHITECTURE_REVIEW.md with:
+- reusable patterns
+- patterns to avoid
+- recommended architecture for Estate Tracker
+- setup steps
+- risks and recommendations
+
+Do not copy expense-specific business logic unless it is clearly reusable.
+```
+
+## Prompt 2 — Create project docs
+
+```txt
+Read PROJECT_SPEC.md and create the following docs:
+
+- docs/PRODUCT_BRIEF.md
+- docs/MVP_SCOPE.md
+- docs/DOMAIN_MODEL.md
+- docs/USER_FLOWS.md
+- docs/DATABASE_SCHEMA.md
+- docs/IMPLEMENTATION_PLAN.md
+- docs/AGENT_RULES.md
+
+Keep PROJECT_SPEC.md as the master source of truth.
+Do not implement code yet.
+```
+
+## Prompt 3 — Implement database schema
+
+```txt
+Using PROJECT_SPEC.md, DOMAIN_MODEL.md, and DATABASE_SCHEMA.md, implement the initial database schema for Estate Tracker.
+
+Include:
+- User
+- Property
+- Tenant
+- RentalAgreement
+- UtilityType
+- PropertyUtilityConfig
+- Meter
+- MeterReading
+- MonthlyStatement
+- MonthlyStatementItem
+- Payment
+- Reminder
+
+Important:
+- Payment must be a separate entity.
+- Do not use paymentCategory = PARTIAL.
+- Partial payment status must be derived from paid amount vs expected amount.
+- Monthly statements must use flexible statement items, not hardcoded utility fields.
+
+After implementation, provide a summary of created models and any assumptions.
+```
+
+## Prompt 4 — Implement first vertical slice
+
+```txt
+Implement the first vertical slice:
+
+Goal:
+Authenticated user can create a property and see it in the property list.
+
+Scope:
+- protected dashboard route
+- property list page
+- create property form
+- property database create/list operations
+- basic validation
+- empty state
+- loading/error states
+
+Do not implement tenants, agreements, statements, or payments yet.
+```
+
+---
+
+# 13. MVP success criteria
+
+The MVP is successful when the user can complete this real-world workflow without Excel:
+
+```txt
+1. Create property
+2. Configure utilities and meters
+3. Add tenant
+4. Add active rental agreement
+5. Request and record meter readings
+6. Mark readings as submitted to provider
+7. Create monthly statement
+8. Enter rent and utility charges
+9. Generate PDF
+10. Copy tenant message
+11. Record separate rent and utility payments
+12. Track partial payments and remaining balance
+13. See pending tasks and overdue payments on dashboard
+```
+
+---
+
+# 14. Future features
+
+Future features after MVP:
+
+```txt
+- automatic email reminders to owner
+- optional email reminders to tenants
+- WhatsApp/Telegram integration
+- utility provider API integrations
+- attachment upload for contracts and bills
+- OCR bill parsing
+- bank payment matching
+- advanced analytics
+- yearly tax/export summary
+- PWA support
+- native mobile app with Expo/React Native
+- tenant portal
+- multi-user access
+```
+
+---
+
+# 15. Open questions
+
+These questions can be resolved during implementation:
+
+```txt
+1. Should statements be generated manually or automatically each month?
+2. Should rent always be part of MonthlyStatementItem, or also duplicated on MonthlyStatement for faster querying?
+3. Should payment allocation support linking payment directly to specific statement items?
+4. Should meter readings be required before creating utility charges?
+5. Should reminders be generated automatically based on property/meter configuration?
+6. Should PDF be stored in database/storage or generated on demand?
+7. Should historical exchange rates be fetched automatically or manually entered?
+8. Should properties support ownership documents and contract uploads in MVP or later?
+```
+
+Suggested MVP answers:
+
+```txt
+1. Generate statements manually.
+2. Store rent on statement and also create a rent item for display.
+3. Use payment category first; item-level allocation can be added later.
+4. Do not require readings before charges in MVP.
+5. Generate simple reminders automatically where possible.
+6. Generate PDF on demand first.
+7. Allow manual exchange rate and optional Monobank fetch.
+8. Add document uploads later.
+```
