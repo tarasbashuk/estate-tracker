@@ -29,3 +29,22 @@ export const MessengerType = {
 } as const
 
 export type MessengerType = (typeof MessengerType)[keyof typeof MessengerType]
+
+
+export const AgreementStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AgreementStatus = (typeof AgreementStatus)[keyof typeof AgreementStatus]
+
+
+export const Currency = {
+  UAH: 'UAH',
+  USD: 'USD',
+  EUR: 'EUR'
+} as const
+
+export type Currency = (typeof Currency)[keyof typeof Currency]

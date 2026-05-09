@@ -10,10 +10,13 @@ import {
   Typography,
 } from '@mui/material';
 
+import { PropertyAgreementsSummary } from '@/features/agreements/components/PropertyAgreementsSummary';
+import { listRentalAgreementsForProperty } from '@/features/agreements/service';
 import { ArchivePropertyButton } from '@/features/properties/components/ArchivePropertyButton';
 import { EditPropertyForm } from '@/features/properties/components/EditPropertyForm';
 import { getProperty } from '@/features/properties/service';
 import type { PropertyFormValues } from '@/features/properties/schemas';
+import { listTenants } from '@/features/tenants/service';
 import { requireUser } from '@/server/requireUser';
 
 const propertyTypeLabels = {
@@ -32,7 +35,11 @@ export default async function PropertyDetailsPage({
 }) {
   const { propertyId } = await params;
   const user = await requireUser();
-  const property = await getProperty(user.id, propertyId);
+  const [property, agreements, tenants] = await Promise.all([
+    getProperty(user.id, propertyId),
+    listRentalAgreementsForProperty(user.id, propertyId),
+    listTenants(user.id),
+  ]);
 
   if (!property) {
     notFound();
@@ -109,6 +116,12 @@ export default async function PropertyDetailsPage({
           <DetailRow label="Notes" value={property.notes} />
         </Stack>
       </Paper>
+
+      <PropertyAgreementsSummary
+        agreements={agreements}
+        property={property}
+        tenants={tenants}
+      />
 
       <EditPropertyForm propertyId={property.id} defaultValues={formDefaults} />
     </Stack>

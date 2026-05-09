@@ -11,4 +11,5 @@
 export type * from './models/User'
 export type * from './models/Property'
 export type * from './models/Tenant'
+export type * from './models/RentalAgreement'
 export type * from './commonInputTypes'

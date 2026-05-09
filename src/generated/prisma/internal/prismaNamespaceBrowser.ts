@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Property: 'Property',
-  Tenant: 'Tenant'
+  Tenant: 'Tenant',
+  RentalAgreement: 'RentalAgreement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -123,6 +124,27 @@ export const TenantScalarFieldEnum = {
 } as const
 
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+export const RentalAgreementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  tenantId: 'tenantId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  monthlyRentAmount: 'monthlyRentAmount',
+  monthlyRentCurrency: 'monthlyRentCurrency',
+  paymentDueDay: 'paymentDueDay',
+  depositAmount: 'depositAmount',
+  depositCurrency: 'depositCurrency',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalAgreementScalarFieldEnum = (typeof RentalAgreementScalarFieldEnum)[keyof typeof RentalAgreementScalarFieldEnum]
 
 
 export const SortOrder = {

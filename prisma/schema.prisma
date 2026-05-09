@@ -17,6 +17,7 @@ model User {
   imageUrl    String?
   properties  Property[]
   tenants     Tenant[]
+  agreements  RentalAgreement[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
@@ -36,6 +37,7 @@ model Property {
   notes        String?
   isArchived   Boolean      @default(false)
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agreements   RentalAgreement[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
@@ -61,6 +63,7 @@ model Tenant {
   notes           String?
   isArchived      Boolean       @default(false)
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agreements      RentalAgreement[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -75,4 +78,43 @@ enum MessengerType {
   EMAIL
   PHONE
   OTHER
+}
+
+model RentalAgreement {
+  id                  String          @id @default(uuid())
+  userId              String
+  propertyId          String
+  tenantId            String
+  startDate           DateTime        @db.Date
+  endDate             DateTime?       @db.Date
+  status              AgreementStatus @default(ACTIVE)
+  monthlyRentAmount   Decimal         @db.Decimal(12, 2)
+  monthlyRentCurrency Currency        @default(UAH)
+  paymentDueDay       Int
+  depositAmount       Decimal?        @db.Decimal(12, 2)
+  depositCurrency     Currency        @default(UAH)
+  notes               String?
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property            Property        @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenant              Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([propertyId])
+  @@index([tenantId])
+  @@index([propertyId, status])
+}
+
+enum AgreementStatus {
+  DRAFT
+  ACTIVE
+  ENDED
+  CANCELLED
+}
+
+enum Currency {
+  UAH
+  USD
+  EUR
 }

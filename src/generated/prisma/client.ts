@@ -56,3 +56,8 @@ export type Property = Prisma.PropertyModel
  * 
  */
 export type Tenant = Prisma.TenantModel
+/**
+ * Model RentalAgreement
+ * 
+ */
+export type RentalAgreement = Prisma.RentalAgreementModel

@@ -386,7 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Property: 'Property',
-  Tenant: 'Tenant'
+  Tenant: 'Tenant',
+  RentalAgreement: 'RentalAgreement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "property" | "tenant"
+    modelProps: "user" | "property" | "tenant" | "rentalAgreement"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -628,6 +629,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RentalAgreement: {
+      payload: Prisma.$RentalAgreementPayload<ExtArgs>
+      fields: Prisma.RentalAgreementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalAgreementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalAgreementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalAgreementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalAgreementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        findMany: {
+          args: Prisma.RentalAgreementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>[]
+        }
+        create: {
+          args: Prisma.RentalAgreementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        createMany: {
+          args: Prisma.RentalAgreementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalAgreementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalAgreementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        update: {
+          args: Prisma.RentalAgreementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalAgreementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalAgreementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalAgreementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalAgreementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalAgreementPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalAgreementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalAgreement>
+        }
+        groupBy: {
+          args: Prisma.RentalAgreementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalAgreementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalAgreementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalAgreementCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -718,6 +793,27 @@ export const TenantScalarFieldEnum = {
 } as const
 
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+export const RentalAgreementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  tenantId: 'tenantId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  monthlyRentAmount: 'monthlyRentAmount',
+  monthlyRentCurrency: 'monthlyRentCurrency',
+  paymentDueDay: 'paymentDueDay',
+  depositAmount: 'depositAmount',
+  depositCurrency: 'depositCurrency',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalAgreementScalarFieldEnum = (typeof RentalAgreementScalarFieldEnum)[keyof typeof RentalAgreementScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -838,6 +934,34 @@ export type EnumMessengerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'MessengerType[]'
  */
 export type ListEnumMessengerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessengerType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AgreementStatus'
+ */
+export type EnumAgreementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgreementStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AgreementStatus[]'
+ */
+export type ListEnumAgreementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgreementStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Currency'
+ */
+export type EnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency'>
+    
+
+
+/**
+ * Reference to a field of type 'Currency[]'
+ */
+export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency[]'>
     
 
 
@@ -967,6 +1091,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   property?: Prisma.PropertyOmit
   tenant?: Prisma.TenantOmit
+  rentalAgreement?: Prisma.RentalAgreementOmit
 }
 
 /* Types for Logging */
