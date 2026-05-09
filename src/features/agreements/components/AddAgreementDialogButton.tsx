@@ -3,15 +3,18 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import type { Property, Tenant } from '@/generated/prisma/client';
 
 import { FullScreenFormDialog } from '@/components/forms/FullScreenFormDialog';
-import { RentalAgreementForm } from './RentalAgreementForm';
+import {
+  type AgreementPropertyOption,
+  type AgreementTenantOption,
+  RentalAgreementForm,
+} from './RentalAgreementForm';
 import type { RentalAgreementFormValues } from '../schemas';
 
 type AddAgreementDialogButtonProps = {
-  properties: Property[];
-  tenants: Tenant[];
+  properties: AgreementPropertyOption[];
+  tenants: AgreementTenantOption[];
   defaultValues?: Partial<RentalAgreementFormValues>;
 };
 
@@ -49,4 +52,3 @@ export function AddAgreementDialogButton({
     </>
   );
 }
-

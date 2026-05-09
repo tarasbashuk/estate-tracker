@@ -57,6 +57,10 @@ export default async function PropertyDetailsPage({
     propertyType: property.propertyType,
     notes: property.notes ?? '',
   };
+  const tenantOptions = tenants.map((tenant) => ({
+    id: tenant.id,
+    fullName: tenant.fullName,
+  }));
 
   return (
     <Stack spacing={3}>
@@ -119,8 +123,8 @@ export default async function PropertyDetailsPage({
 
       <PropertyAgreementsSummary
         agreements={agreements}
-        property={property}
-        tenants={tenants}
+        property={{ id: property.id, name: property.name }}
+        tenants={tenantOptions}
       />
 
       <EditPropertyForm propertyId={property.id} defaultValues={formDefaults} />

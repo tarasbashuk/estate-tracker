@@ -51,6 +51,14 @@ export default async function AgreementDetailsPage({
     depositCurrency: agreement.depositCurrency,
     notes: agreement.notes ?? '',
   };
+  const propertyOptions = properties.map((property) => ({
+    id: property.id,
+    name: property.name,
+  }));
+  const tenantOptions = tenants.map((tenant) => ({
+    id: tenant.id,
+    fullName: tenant.fullName,
+  }));
 
   return (
     <Stack spacing={3}>
@@ -120,8 +128,8 @@ export default async function AgreementDetailsPage({
 
       <EditAgreementForm
         agreementId={agreement.id}
-        properties={properties}
-        tenants={tenants}
+        properties={propertyOptions}
+        tenants={tenantOptions}
         defaultValues={formDefaults}
       />
     </Stack>
@@ -154,4 +162,3 @@ function formatDate(date: Date) {
 function toDateInputValue(date: Date) {
   return date.toISOString().slice(0, 10);
 }
-

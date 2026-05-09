@@ -16,6 +16,14 @@ export default async function AgreementsPage() {
     listProperties(user.id),
     listTenants(user.id),
   ]);
+  const propertyOptions = properties.map((property) => ({
+    id: property.id,
+    name: property.name,
+  }));
+  const tenantOptions = tenants.map((tenant) => ({
+    id: tenant.id,
+    fullName: tenant.fullName,
+  }));
 
   return (
     <Stack spacing={3}>
@@ -32,11 +40,13 @@ export default async function AgreementsPage() {
             Connect properties and tenants with rent and payment terms.
           </Typography>
         </Stack>
-        <AddAgreementDialogButton properties={properties} tenants={tenants} />
+        <AddAgreementDialogButton
+          properties={propertyOptions}
+          tenants={tenantOptions}
+        />
       </Stack>
 
       <RentalAgreementList agreements={agreements} />
     </Stack>
   );
 }
-

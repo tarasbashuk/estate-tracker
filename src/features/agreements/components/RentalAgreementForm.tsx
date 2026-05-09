@@ -14,7 +14,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import type { Property, Tenant } from '@/generated/prisma/client';
 
 import { createRentalAgreementAction } from '@/app/actions/agreements';
 import {
@@ -24,6 +23,16 @@ import {
   type RentalAgreementActionState,
   type RentalAgreementFormValues,
 } from '@/features/agreements/schemas';
+
+export type AgreementPropertyOption = {
+  id: string;
+  name: string;
+};
+
+export type AgreementTenantOption = {
+  id: string;
+  fullName: string;
+};
 
 const agreementStatusLabels: Record<
   (typeof agreementStatusValues)[number],
@@ -36,8 +45,8 @@ const agreementStatusLabels: Record<
 };
 
 type RentalAgreementFormProps = {
-  properties: Property[];
-  tenants: Tenant[];
+  properties: AgreementPropertyOption[];
+  tenants: AgreementTenantOption[];
   defaultValues?: Partial<RentalAgreementFormValues>;
   submitLabel?: string;
   title?: string;
@@ -407,4 +416,3 @@ function applyActionErrors(
     });
   }
 }
-

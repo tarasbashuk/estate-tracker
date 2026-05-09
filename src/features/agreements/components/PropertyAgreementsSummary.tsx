@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import { Button, Divider, Paper, Stack, Typography } from '@mui/material';
-import type { Prisma, Property, Tenant } from '@/generated/prisma/client';
+import type { Prisma } from '@/generated/prisma/client';
 
 import { AddAgreementDialogButton } from './AddAgreementDialogButton';
 import { AgreementStatusChip } from './AgreementStatusChip';
+import type {
+  AgreementPropertyOption,
+  AgreementTenantOption,
+} from './RentalAgreementForm';
 
 type PropertyAgreement = Prisma.RentalAgreementGetPayload<{
   include: { tenant: true };
@@ -15,8 +19,8 @@ export function PropertyAgreementsSummary({
   tenants,
 }: {
   agreements: PropertyAgreement[];
-  property: Property;
-  tenants: Tenant[];
+  property: AgreementPropertyOption;
+  tenants: AgreementTenantOption[];
 }) {
   const activeAgreement = agreements.find(
     (agreement) => agreement.status === 'ACTIVE',
@@ -94,4 +98,3 @@ function AgreementLine({ agreement }: { agreement: PropertyAgreement }) {
     </Stack>
   );
 }
-

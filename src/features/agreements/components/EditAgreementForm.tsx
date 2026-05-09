@@ -1,16 +1,19 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import type { Property, Tenant } from '@/generated/prisma/client';
 
 import { updateRentalAgreementAction } from '@/app/actions/agreements';
 import type { RentalAgreementFormValues } from '@/features/agreements/schemas';
-import { RentalAgreementForm } from './RentalAgreementForm';
+import {
+  type AgreementPropertyOption,
+  type AgreementTenantOption,
+  RentalAgreementForm,
+} from './RentalAgreementForm';
 
 type EditAgreementFormProps = {
   agreementId: string;
-  properties: Property[];
-  tenants: Tenant[];
+  properties: AgreementPropertyOption[];
+  tenants: AgreementTenantOption[];
   defaultValues: RentalAgreementFormValues;
 };
 
@@ -42,4 +45,3 @@ export function EditAgreementForm({
     />
   );
 }
-
