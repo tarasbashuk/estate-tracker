@@ -282,6 +282,7 @@ export type MonthlyStatementWhereInput = {
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   items?: Prisma.MonthlyStatementItemListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
 }
 
 export type MonthlyStatementOrderByWithRelationInput = {
@@ -303,6 +304,7 @@ export type MonthlyStatementOrderByWithRelationInput = {
   tenant?: Prisma.TenantOrderByWithRelationInput
   items?: Prisma.MonthlyStatementItemOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  reminders?: Prisma.ReminderOrderByRelationAggregateInput
 }
 
 export type MonthlyStatementWhereUniqueInput = Prisma.AtLeast<{
@@ -328,6 +330,7 @@ export type MonthlyStatementWhereUniqueInput = Prisma.AtLeast<{
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   items?: Prisma.MonthlyStatementItemListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
 }, "id" | "propertyId_periodMonth_periodYear">
 
 export type MonthlyStatementOrderByWithAggregationInput = {
@@ -383,6 +386,7 @@ export type MonthlyStatementCreateInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateInput = {
@@ -400,6 +404,7 @@ export type MonthlyStatementUncheckedCreateInput = {
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUpdateInput = {
@@ -417,6 +422,7 @@ export type MonthlyStatementUpdateInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateInput = {
@@ -434,6 +440,7 @@ export type MonthlyStatementUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementCreateManyInput = {
@@ -551,6 +558,11 @@ export type MonthlyStatementSumOrderByAggregateInput = {
 export type MonthlyStatementScalarRelationFilter = {
   is?: Prisma.MonthlyStatementWhereInput
   isNot?: Prisma.MonthlyStatementWhereInput
+}
+
+export type MonthlyStatementNullableScalarRelationFilter = {
+  is?: Prisma.MonthlyStatementWhereInput | null
+  isNot?: Prisma.MonthlyStatementWhereInput | null
 }
 
 export type MonthlyStatementCreateNestedManyWithoutUserInput = {
@@ -753,6 +765,22 @@ export type MonthlyStatementUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MonthlyStatementUpdateToOneWithWhereWithoutPaymentsInput, Prisma.MonthlyStatementUpdateWithoutPaymentsInput>, Prisma.MonthlyStatementUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type MonthlyStatementCreateNestedOneWithoutRemindersInput = {
+  create?: Prisma.XOR<Prisma.MonthlyStatementCreateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.MonthlyStatementCreateOrConnectWithoutRemindersInput
+  connect?: Prisma.MonthlyStatementWhereUniqueInput
+}
+
+export type MonthlyStatementUpdateOneWithoutRemindersNestedInput = {
+  create?: Prisma.XOR<Prisma.MonthlyStatementCreateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.MonthlyStatementCreateOrConnectWithoutRemindersInput
+  upsert?: Prisma.MonthlyStatementUpsertWithoutRemindersInput
+  disconnect?: Prisma.MonthlyStatementWhereInput | boolean
+  delete?: Prisma.MonthlyStatementWhereInput | boolean
+  connect?: Prisma.MonthlyStatementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MonthlyStatementUpdateToOneWithWhereWithoutRemindersInput, Prisma.MonthlyStatementUpdateWithoutRemindersInput>, Prisma.MonthlyStatementUncheckedUpdateWithoutRemindersInput>
+}
+
 export type MonthlyStatementCreateWithoutUserInput = {
   id?: string
   periodMonth: number
@@ -767,6 +795,7 @@ export type MonthlyStatementCreateWithoutUserInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutUserInput = {
@@ -783,6 +812,7 @@ export type MonthlyStatementUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutUserInput = {
@@ -843,6 +873,7 @@ export type MonthlyStatementCreateWithoutPropertyInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutPropertyInput = {
@@ -859,6 +890,7 @@ export type MonthlyStatementUncheckedCreateWithoutPropertyInput = {
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutPropertyInput = {
@@ -901,6 +933,7 @@ export type MonthlyStatementCreateWithoutTenantInput = {
   rentalAgreement: Prisma.RentalAgreementCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutTenantInput = {
@@ -917,6 +950,7 @@ export type MonthlyStatementUncheckedCreateWithoutTenantInput = {
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutTenantInput = {
@@ -959,6 +993,7 @@ export type MonthlyStatementCreateWithoutRentalAgreementInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutRentalAgreementInput = {
@@ -975,6 +1010,7 @@ export type MonthlyStatementUncheckedCreateWithoutRentalAgreementInput = {
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutRentalAgreementInput = {
@@ -1017,6 +1053,7 @@ export type MonthlyStatementCreateWithoutItemsInput = {
   rentalAgreement: Prisma.RentalAgreementCreateNestedOneWithoutMonthlyStatementsInput
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutItemsInput = {
@@ -1033,6 +1070,7 @@ export type MonthlyStatementUncheckedCreateWithoutItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutItemsInput = {
@@ -1065,6 +1103,7 @@ export type MonthlyStatementUpdateWithoutItemsInput = {
   rentalAgreement?: Prisma.RentalAgreementUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutItemsInput = {
@@ -1081,6 +1120,7 @@ export type MonthlyStatementUncheckedUpdateWithoutItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementCreateWithoutPaymentsInput = {
@@ -1097,6 +1137,7 @@ export type MonthlyStatementCreateWithoutPaymentsInput = {
   rentalAgreement: Prisma.RentalAgreementCreateNestedOneWithoutMonthlyStatementsInput
   tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
   items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementUncheckedCreateWithoutPaymentsInput = {
@@ -1113,6 +1154,7 @@ export type MonthlyStatementUncheckedCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMonthlyStatementInput
 }
 
 export type MonthlyStatementCreateOrConnectWithoutPaymentsInput = {
@@ -1145,6 +1187,7 @@ export type MonthlyStatementUpdateWithoutPaymentsInput = {
   rentalAgreement?: Prisma.RentalAgreementUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutPaymentsInput = {
@@ -1161,6 +1204,91 @@ export type MonthlyStatementUncheckedUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+}
+
+export type MonthlyStatementCreateWithoutRemindersInput = {
+  id?: string
+  periodMonth: number
+  periodYear: number
+  dueDate: Date | string
+  status?: $Enums.StatementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMonthlyStatementsInput
+  property: Prisma.PropertyCreateNestedOneWithoutMonthlyStatementsInput
+  rentalAgreement: Prisma.RentalAgreementCreateNestedOneWithoutMonthlyStatementsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutMonthlyStatementsInput
+  items?: Prisma.MonthlyStatementItemCreateNestedManyWithoutMonthlyStatementInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMonthlyStatementInput
+}
+
+export type MonthlyStatementUncheckedCreateWithoutRemindersInput = {
+  id?: string
+  userId: string
+  propertyId: string
+  rentalAgreementId: string
+  tenantId: string
+  periodMonth: number
+  periodYear: number
+  dueDate: Date | string
+  status?: $Enums.StatementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutMonthlyStatementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMonthlyStatementInput
+}
+
+export type MonthlyStatementCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.MonthlyStatementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MonthlyStatementCreateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedCreateWithoutRemindersInput>
+}
+
+export type MonthlyStatementUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.MonthlyStatementUpdateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.MonthlyStatementCreateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.MonthlyStatementWhereInput
+}
+
+export type MonthlyStatementUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.MonthlyStatementWhereInput
+  data: Prisma.XOR<Prisma.MonthlyStatementUpdateWithoutRemindersInput, Prisma.MonthlyStatementUncheckedUpdateWithoutRemindersInput>
+}
+
+export type MonthlyStatementUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  periodMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  periodYear?: Prisma.IntFieldUpdateOperationsInput | number
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatementStatusFieldUpdateOperationsInput | $Enums.StatementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMonthlyStatementsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutMonthlyStatementsNestedInput
+  rentalAgreement?: Prisma.RentalAgreementUpdateOneRequiredWithoutMonthlyStatementsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
+  items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+}
+
+export type MonthlyStatementUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalAgreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  periodMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  periodYear?: Prisma.IntFieldUpdateOperationsInput | number
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatementStatusFieldUpdateOperationsInput | $Enums.StatementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementCreateManyUserInput = {
@@ -1191,6 +1319,7 @@ export type MonthlyStatementUpdateWithoutUserInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutUserInput = {
@@ -1207,6 +1336,7 @@ export type MonthlyStatementUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateManyWithoutUserInput = {
@@ -1251,6 +1381,7 @@ export type MonthlyStatementUpdateWithoutPropertyInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutPropertyInput = {
@@ -1267,6 +1398,7 @@ export type MonthlyStatementUncheckedUpdateWithoutPropertyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateManyWithoutPropertyInput = {
@@ -1311,6 +1443,7 @@ export type MonthlyStatementUpdateWithoutTenantInput = {
   rentalAgreement?: Prisma.RentalAgreementUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutTenantInput = {
@@ -1327,6 +1460,7 @@ export type MonthlyStatementUncheckedUpdateWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateManyWithoutTenantInput = {
@@ -1371,6 +1505,7 @@ export type MonthlyStatementUpdateWithoutRentalAgreementInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMonthlyStatementsNestedInput
   items?: Prisma.MonthlyStatementItemUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateWithoutRentalAgreementInput = {
@@ -1387,6 +1522,7 @@ export type MonthlyStatementUncheckedUpdateWithoutRentalAgreementInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutMonthlyStatementNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutMonthlyStatementNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMonthlyStatementNestedInput
 }
 
 export type MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementInput = {
@@ -1411,11 +1547,13 @@ export type MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementInput = {
 export type MonthlyStatementCountOutputType = {
   items: number
   payments: number
+  reminders: number
 }
 
 export type MonthlyStatementCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | MonthlyStatementCountOutputTypeCountItemsArgs
   payments?: boolean | MonthlyStatementCountOutputTypeCountPaymentsArgs
+  reminders?: boolean | MonthlyStatementCountOutputTypeCountRemindersArgs
 }
 
 /**
@@ -1442,6 +1580,13 @@ export type MonthlyStatementCountOutputTypeCountPaymentsArgs<ExtArgs extends run
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * MonthlyStatementCountOutputType without action
+ */
+export type MonthlyStatementCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReminderWhereInput
+}
+
 
 export type MonthlyStatementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1462,6 +1607,7 @@ export type MonthlyStatementSelect<ExtArgs extends runtime.Types.Extensions.Inte
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   items?: boolean | Prisma.MonthlyStatement$itemsArgs<ExtArgs>
   payments?: boolean | Prisma.MonthlyStatement$paymentsArgs<ExtArgs>
+  reminders?: boolean | Prisma.MonthlyStatement$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.MonthlyStatementCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["monthlyStatement"]>
 
@@ -1526,6 +1672,7 @@ export type MonthlyStatementInclude<ExtArgs extends runtime.Types.Extensions.Int
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   items?: boolean | Prisma.MonthlyStatement$itemsArgs<ExtArgs>
   payments?: boolean | Prisma.MonthlyStatement$paymentsArgs<ExtArgs>
+  reminders?: boolean | Prisma.MonthlyStatement$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.MonthlyStatementCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MonthlyStatementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1550,6 +1697,7 @@ export type $MonthlyStatementPayload<ExtArgs extends runtime.Types.Extensions.In
     tenant: Prisma.$TenantPayload<ExtArgs>
     items: Prisma.$MonthlyStatementItemPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    reminders: Prisma.$ReminderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1964,6 +2112,7 @@ export interface Prisma__MonthlyStatementClient<T, Null = never, ExtArgs extends
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.MonthlyStatement$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MonthlyStatement$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MonthlyStatementItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.MonthlyStatement$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MonthlyStatement$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminders<T extends Prisma.MonthlyStatement$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MonthlyStatement$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2451,6 +2600,30 @@ export type MonthlyStatement$paymentsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * MonthlyStatement.reminders
+ */
+export type MonthlyStatement$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reminder
+   */
+  select?: Prisma.ReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reminder
+   */
+  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReminderInclude<ExtArgs> | null
+  where?: Prisma.ReminderWhereInput
+  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  cursor?: Prisma.ReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**

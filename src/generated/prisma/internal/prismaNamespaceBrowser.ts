@@ -61,7 +61,8 @@ export const ModelName = {
   MeterReading: 'MeterReading',
   MonthlyStatement: 'MonthlyStatement',
   MonthlyStatementItem: 'MonthlyStatementItem',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  Reminder: 'Reminder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -278,6 +279,26 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const ReminderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  tenantId: 'tenantId',
+  monthlyStatementId: 'monthlyStatementId',
+  meterId: 'meterId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  dueDate: 'dueDate',
+  status: 'status',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
 
 
 export const SortOrder = {

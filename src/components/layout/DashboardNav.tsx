@@ -13,6 +13,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupsIcon from '@mui/icons-material/Groups';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: <DashboardIcon /> },
@@ -20,6 +21,7 @@ const navItems = [
   { label: 'Tenants', href: '/tenants', icon: <GroupsIcon /> },
   { label: 'Agreements', href: '/agreements', icon: <AssignmentIcon /> },
   { label: 'Statements', href: '/statements', icon: <ReceiptLongIcon /> },
+  { label: 'Reminders', href: '/reminders', icon: <TaskAltIcon /> },
 ];
 
 export function DashboardNav() {

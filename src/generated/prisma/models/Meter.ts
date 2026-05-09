@@ -312,6 +312,7 @@ export type MeterWhereInput = {
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   utilityType?: Prisma.XOR<Prisma.UtilityTypeScalarRelationFilter, Prisma.UtilityTypeWhereInput>
   readings?: Prisma.MeterReadingListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
 }
 
 export type MeterOrderByWithRelationInput = {
@@ -335,6 +336,7 @@ export type MeterOrderByWithRelationInput = {
   property?: Prisma.PropertyOrderByWithRelationInput
   utilityType?: Prisma.UtilityTypeOrderByWithRelationInput
   readings?: Prisma.MeterReadingOrderByRelationAggregateInput
+  reminders?: Prisma.ReminderOrderByRelationAggregateInput
 }
 
 export type MeterWhereUniqueInput = Prisma.AtLeast<{
@@ -361,6 +363,7 @@ export type MeterWhereUniqueInput = Prisma.AtLeast<{
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   utilityType?: Prisma.XOR<Prisma.UtilityTypeScalarRelationFilter, Prisma.UtilityTypeWhereInput>
   readings?: Prisma.MeterReadingListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
 }, "id">
 
 export type MeterOrderByWithAggregationInput = {
@@ -427,6 +430,7 @@ export type MeterCreateInput = {
   property: Prisma.PropertyCreateNestedOneWithoutMetersInput
   utilityType: Prisma.UtilityTypeCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateInput = {
@@ -447,6 +451,7 @@ export type MeterUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUpdateInput = {
@@ -467,6 +472,7 @@ export type MeterUpdateInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutMetersNestedInput
   utilityType?: Prisma.UtilityTypeUpdateOneRequiredWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateInput = {
@@ -487,6 +493,7 @@ export type MeterUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterCreateManyInput = {
@@ -623,6 +630,11 @@ export type MeterSumOrderByAggregateInput = {
 export type MeterScalarRelationFilter = {
   is?: Prisma.MeterWhereInput
   isNot?: Prisma.MeterWhereInput
+}
+
+export type MeterNullableScalarRelationFilter = {
+  is?: Prisma.MeterWhereInput | null
+  isNot?: Prisma.MeterWhereInput | null
 }
 
 export type MeterCreateNestedManyWithoutUserInput = {
@@ -769,6 +781,22 @@ export type MeterUpdateOneRequiredWithoutReadingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MeterUpdateToOneWithWhereWithoutReadingsInput, Prisma.MeterUpdateWithoutReadingsInput>, Prisma.MeterUncheckedUpdateWithoutReadingsInput>
 }
 
+export type MeterCreateNestedOneWithoutRemindersInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutRemindersInput, Prisma.MeterUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutRemindersInput
+  connect?: Prisma.MeterWhereUniqueInput
+}
+
+export type MeterUpdateOneWithoutRemindersNestedInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutRemindersInput, Prisma.MeterUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutRemindersInput
+  upsert?: Prisma.MeterUpsertWithoutRemindersInput
+  disconnect?: Prisma.MeterWhereInput | boolean
+  delete?: Prisma.MeterWhereInput | boolean
+  connect?: Prisma.MeterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeterUpdateToOneWithWhereWithoutRemindersInput, Prisma.MeterUpdateWithoutRemindersInput>, Prisma.MeterUncheckedUpdateWithoutRemindersInput>
+}
+
 export type MeterCreateWithoutUserInput = {
   id?: string
   name: string
@@ -786,6 +814,7 @@ export type MeterCreateWithoutUserInput = {
   property: Prisma.PropertyCreateNestedOneWithoutMetersInput
   utilityType: Prisma.UtilityTypeCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutUserInput = {
@@ -805,6 +834,7 @@ export type MeterUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutUserInput = {
@@ -872,6 +902,7 @@ export type MeterCreateWithoutPropertyInput = {
   user: Prisma.UserCreateNestedOneWithoutMetersInput
   utilityType: Prisma.UtilityTypeCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutPropertyInput = {
@@ -891,6 +922,7 @@ export type MeterUncheckedCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutPropertyInput = {
@@ -936,6 +968,7 @@ export type MeterCreateWithoutUtilityTypeInput = {
   user: Prisma.UserCreateNestedOneWithoutMetersInput
   property: Prisma.PropertyCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutUtilityTypeInput = {
@@ -955,6 +988,7 @@ export type MeterUncheckedCreateWithoutUtilityTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutUtilityTypeInput = {
@@ -1000,6 +1034,7 @@ export type MeterCreateWithoutReadingsInput = {
   user: Prisma.UserCreateNestedOneWithoutMetersInput
   property: Prisma.PropertyCreateNestedOneWithoutMetersInput
   utilityType: Prisma.UtilityTypeCreateNestedOneWithoutMetersInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutReadingsInput = {
@@ -1019,6 +1054,7 @@ export type MeterUncheckedCreateWithoutReadingsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutReadingsInput = {
@@ -1054,6 +1090,7 @@ export type MeterUpdateWithoutReadingsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutMetersNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutMetersNestedInput
   utilityType?: Prisma.UtilityTypeUpdateOneRequiredWithoutMetersNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutReadingsInput = {
@@ -1073,6 +1110,103 @@ export type MeterUncheckedUpdateWithoutReadingsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMeterNestedInput
+}
+
+export type MeterCreateWithoutRemindersInput = {
+  id?: string
+  name: string
+  providerName?: string | null
+  accountNumber?: string | null
+  submissionMethod?: $Enums.SubmissionMethod
+  submissionUrl?: string | null
+  submissionEmail?: string | null
+  submissionDayStart?: number | null
+  submissionDayEnd?: number | null
+  notes?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMetersInput
+  property: Prisma.PropertyCreateNestedOneWithoutMetersInput
+  utilityType: Prisma.UtilityTypeCreateNestedOneWithoutMetersInput
+  readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+}
+
+export type MeterUncheckedCreateWithoutRemindersInput = {
+  id?: string
+  userId: string
+  propertyId: string
+  utilityTypeId: string
+  name: string
+  providerName?: string | null
+  accountNumber?: string | null
+  submissionMethod?: $Enums.SubmissionMethod
+  submissionUrl?: string | null
+  submissionEmail?: string | null
+  submissionDayStart?: number | null
+  submissionDayEnd?: number | null
+  notes?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+}
+
+export type MeterCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.MeterWhereUniqueInput
+  create: Prisma.XOR<Prisma.MeterCreateWithoutRemindersInput, Prisma.MeterUncheckedCreateWithoutRemindersInput>
+}
+
+export type MeterUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.MeterUpdateWithoutRemindersInput, Prisma.MeterUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.MeterCreateWithoutRemindersInput, Prisma.MeterUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.MeterWhereInput
+}
+
+export type MeterUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.MeterWhereInput
+  data: Prisma.XOR<Prisma.MeterUpdateWithoutRemindersInput, Prisma.MeterUncheckedUpdateWithoutRemindersInput>
+}
+
+export type MeterUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  providerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionMethod?: Prisma.EnumSubmissionMethodFieldUpdateOperationsInput | $Enums.SubmissionMethod
+  submissionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionDayStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  submissionDayEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMetersNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutMetersNestedInput
+  utilityType?: Prisma.UtilityTypeUpdateOneRequiredWithoutMetersNestedInput
+  readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+}
+
+export type MeterUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  utilityTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  providerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionMethod?: Prisma.EnumSubmissionMethodFieldUpdateOperationsInput | $Enums.SubmissionMethod
+  submissionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submissionDayStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  submissionDayEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterCreateManyUserInput = {
@@ -1110,6 +1244,7 @@ export type MeterUpdateWithoutUserInput = {
   property?: Prisma.PropertyUpdateOneRequiredWithoutMetersNestedInput
   utilityType?: Prisma.UtilityTypeUpdateOneRequiredWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutUserInput = {
@@ -1129,6 +1264,7 @@ export type MeterUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateManyWithoutUserInput = {
@@ -1184,6 +1320,7 @@ export type MeterUpdateWithoutPropertyInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutMetersNestedInput
   utilityType?: Prisma.UtilityTypeUpdateOneRequiredWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutPropertyInput = {
@@ -1203,6 +1340,7 @@ export type MeterUncheckedUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateManyWithoutPropertyInput = {
@@ -1258,6 +1396,7 @@ export type MeterUpdateWithoutUtilityTypeInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutMetersNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutUtilityTypeInput = {
@@ -1277,6 +1416,7 @@ export type MeterUncheckedUpdateWithoutUtilityTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateManyWithoutUtilityTypeInput = {
@@ -1304,10 +1444,12 @@ export type MeterUncheckedUpdateManyWithoutUtilityTypeInput = {
 
 export type MeterCountOutputType = {
   readings: number
+  reminders: number
 }
 
 export type MeterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   readings?: boolean | MeterCountOutputTypeCountReadingsArgs
+  reminders?: boolean | MeterCountOutputTypeCountRemindersArgs
 }
 
 /**
@@ -1325,6 +1467,13 @@ export type MeterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
  */
 export type MeterCountOutputTypeCountReadingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MeterReadingWhereInput
+}
+
+/**
+ * MeterCountOutputType without action
+ */
+export type MeterCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReminderWhereInput
 }
 
 
@@ -1349,6 +1498,7 @@ export type MeterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   utilityType?: boolean | Prisma.UtilityTypeDefaultArgs<ExtArgs>
   readings?: boolean | Prisma.Meter$readingsArgs<ExtArgs>
+  reminders?: boolean | Prisma.Meter$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["meter"]>
 
@@ -1421,6 +1571,7 @@ export type MeterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   utilityType?: boolean | Prisma.UtilityTypeDefaultArgs<ExtArgs>
   readings?: boolean | Prisma.Meter$readingsArgs<ExtArgs>
+  reminders?: boolean | Prisma.Meter$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MeterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1441,6 +1592,7 @@ export type $MeterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     property: Prisma.$PropertyPayload<ExtArgs>
     utilityType: Prisma.$UtilityTypePayload<ExtArgs>
     readings: Prisma.$MeterReadingPayload<ExtArgs>[]
+    reminders: Prisma.$ReminderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1857,6 +2009,7 @@ export interface Prisma__MeterClient<T, Null = never, ExtArgs extends runtime.Ty
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   utilityType<T extends Prisma.UtilityTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__UtilityTypeClient<runtime.Types.Result.GetResult<Prisma.$UtilityTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   readings<T extends Prisma.Meter$readingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$readingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminders<T extends Prisma.Meter$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2324,6 +2477,30 @@ export type Meter$readingsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.MeterReadingScalarFieldEnum | Prisma.MeterReadingScalarFieldEnum[]
+}
+
+/**
+ * Meter.reminders
+ */
+export type Meter$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reminder
+   */
+  select?: Prisma.ReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reminder
+   */
+  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReminderInclude<ExtArgs> | null
+  where?: Prisma.ReminderWhereInput
+  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  cursor?: Prisma.ReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**

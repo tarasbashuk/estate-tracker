@@ -29,6 +29,19 @@ export async function listMetersForProperty(
   });
 }
 
+export async function listMeters(userId: string) {
+  return db.meter.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      property: true,
+      utilityType: true,
+    },
+    orderBy: [{ isActive: 'desc' }, { createdAt: 'desc' }],
+  });
+}
+
 export async function createMeter(
   userId: string,
   propertyId: string,

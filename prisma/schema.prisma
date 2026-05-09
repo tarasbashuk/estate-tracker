@@ -25,6 +25,7 @@ model User {
   monthlyStatements MonthlyStatement[]
   monthlyStatementItems MonthlyStatementItem[]
   payments      Payment[]
+  reminders     Reminder[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -50,6 +51,7 @@ model Property {
   meterReadings  MeterReading[]
   monthlyStatements MonthlyStatement[]
   payments       Payment[]
+  reminders      Reminder[]
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
@@ -78,6 +80,7 @@ model Tenant {
   agreements      RentalAgreement[]
   monthlyStatements MonthlyStatement[]
   payments        Payment[]
+  reminders       Reminder[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -190,6 +193,7 @@ model Meter {
   property           Property         @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   utilityType        UtilityType      @relation(fields: [utilityTypeId], references: [id], onDelete: Restrict)
   readings           MeterReading[]
+  reminders          Reminder[]
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
 
@@ -259,6 +263,7 @@ model MonthlyStatement {
   tenant            Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   items             MonthlyStatementItem[]
   payments          Payment[]
+  reminders         Reminder[]
   createdAt         DateTime               @default(now())
   updatedAt         DateTime               @updatedAt
 
@@ -346,4 +351,48 @@ enum PaymentMethod {
   CASH
   CARD
   OTHER
+}
+
+model Reminder {
+  id                 String         @id @default(uuid())
+  userId             String
+  propertyId         String?
+  tenantId           String?
+  monthlyStatementId String?
+  meterId            String?
+  type               ReminderType
+  title              String
+  description        String?
+  dueDate            DateTime       @db.Date
+  status             ReminderStatus @default(OPEN)
+  completedAt        DateTime?
+  user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property           Property?      @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  tenant             Tenant?        @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+  monthlyStatement   MonthlyStatement? @relation(fields: [monthlyStatementId], references: [id], onDelete: SetNull)
+  meter              Meter?         @relation(fields: [meterId], references: [id], onDelete: SetNull)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([propertyId])
+  @@index([tenantId])
+  @@index([monthlyStatementId])
+  @@index([meterId])
+  @@index([status, dueDate])
+}
+
+enum ReminderType {
+  REQUEST_METER_READINGS_FROM_TENANT
+  SUBMIT_METER_READINGS_TO_PROVIDER
+  RENT_PAYMENT_DUE
+  UTILITIES_PAYMENT_DUE
+  CUSTOM
+}
+
+enum ReminderStatus {
+  OPEN
+  DONE
+  SKIPPED
+  CANCELLED
 }

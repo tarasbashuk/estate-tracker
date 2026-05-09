@@ -72,3 +72,8 @@ export type MonthlyStatementItem = Prisma.MonthlyStatementItemModel
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model Reminder
+ * 
+ */
+export type Reminder = Prisma.ReminderModel

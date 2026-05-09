@@ -112,3 +112,24 @@ export const PaymentMethod = {
 } as const
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const ReminderType = {
+  REQUEST_METER_READINGS_FROM_TENANT: 'REQUEST_METER_READINGS_FROM_TENANT',
+  SUBMIT_METER_READINGS_TO_PROVIDER: 'SUBMIT_METER_READINGS_TO_PROVIDER',
+  RENT_PAYMENT_DUE: 'RENT_PAYMENT_DUE',
+  UTILITIES_PAYMENT_DUE: 'UTILITIES_PAYMENT_DUE',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type ReminderType = (typeof ReminderType)[keyof typeof ReminderType]
+
+
+export const ReminderStatus = {
+  OPEN: 'OPEN',
+  DONE: 'DONE',
+  SKIPPED: 'SKIPPED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type ReminderStatus = (typeof ReminderStatus)[keyof typeof ReminderStatus]
