@@ -24,6 +24,7 @@ model User {
   meterReadings MeterReading[]
   monthlyStatements MonthlyStatement[]
   monthlyStatementItems MonthlyStatementItem[]
+  payments      Payment[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -48,6 +49,7 @@ model Property {
   meters         Meter[]
   meterReadings  MeterReading[]
   monthlyStatements MonthlyStatement[]
+  payments       Payment[]
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
@@ -75,6 +77,7 @@ model Tenant {
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   agreements      RentalAgreement[]
   monthlyStatements MonthlyStatement[]
+  payments        Payment[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -255,6 +258,7 @@ model MonthlyStatement {
   rentalAgreement   RentalAgreement        @relation(fields: [rentalAgreementId], references: [id], onDelete: Restrict)
   tenant            Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   items             MonthlyStatementItem[]
+  payments          Payment[]
   createdAt         DateTime               @default(now())
   updatedAt         DateTime               @updatedAt
 
@@ -301,4 +305,45 @@ enum StatementItemType {
   CUSTOM
   DISCOUNT
   ADJUSTMENT
+}
+
+model Payment {
+  id                 String          @id @default(uuid())
+  userId             String
+  monthlyStatementId String
+  propertyId         String
+  tenantId           String
+  amount             Decimal         @db.Decimal(12, 2)
+  currency           Currency        @default(UAH)
+  category           PaymentCategory
+  method             PaymentMethod   @default(BANK_TRANSFER)
+  paidAt             DateTime        @db.Date
+  notes              String?
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  monthlyStatement   MonthlyStatement @relation(fields: [monthlyStatementId], references: [id], onDelete: Cascade)
+  property           Property        @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenant             Tenant          @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([monthlyStatementId])
+  @@index([propertyId])
+  @@index([tenantId])
+  @@index([paidAt])
+}
+
+enum PaymentCategory {
+  RENT
+  UTILITIES
+  DEPOSIT
+  MIXED
+  OTHER
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  CASH
+  CARD
+  OTHER
 }

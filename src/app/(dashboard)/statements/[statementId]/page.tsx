@@ -13,6 +13,8 @@ import {
   Typography,
 } from '@mui/material';
 
+import { PaymentHistory } from '@/features/payments/components/PaymentHistory';
+import { PaymentSummary } from '@/features/payments/components/PaymentSummary';
 import { StatementStatusChip } from '@/features/statements/components/StatementStatusChip';
 import {
   calculateStatementTotal,
@@ -76,6 +78,8 @@ export default async function StatementDetailsPage({
         </Stack>
       </Paper>
 
+      <PaymentSummary statement={statement} />
+
       <Paper
         elevation={0}
         sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}
@@ -108,6 +112,8 @@ export default async function StatementDetailsPage({
           </Table>
         </Stack>
       </Paper>
+
+      <PaymentHistory payments={statement.payments} />
     </Stack>
   );
 }

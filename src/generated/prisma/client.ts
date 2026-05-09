@@ -91,3 +91,8 @@ export type MonthlyStatement = Prisma.MonthlyStatementModel
  * 
  */
 export type MonthlyStatementItem = Prisma.MonthlyStatementItemModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

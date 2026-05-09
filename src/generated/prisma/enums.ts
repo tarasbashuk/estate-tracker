@@ -91,3 +91,24 @@ export const StatementItemType = {
 } as const
 
 export type StatementItemType = (typeof StatementItemType)[keyof typeof StatementItemType]
+
+
+export const PaymentCategory = {
+  RENT: 'RENT',
+  UTILITIES: 'UTILITIES',
+  DEPOSIT: 'DEPOSIT',
+  MIXED: 'MIXED',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentCategory = (typeof PaymentCategory)[keyof typeof PaymentCategory]
+
+
+export const PaymentMethod = {
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CASH: 'CASH',
+  CARD: 'CARD',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]

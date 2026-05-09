@@ -306,6 +306,7 @@ export type PropertyWhereInput = {
   meters?: Prisma.MeterListRelationFilter
   meterReadings?: Prisma.MeterReadingListRelationFilter
   monthlyStatements?: Prisma.MonthlyStatementListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
 }
 
 export type PropertyOrderByWithRelationInput = {
@@ -330,6 +331,7 @@ export type PropertyOrderByWithRelationInput = {
   meters?: Prisma.MeterOrderByRelationAggregateInput
   meterReadings?: Prisma.MeterReadingOrderByRelationAggregateInput
   monthlyStatements?: Prisma.MonthlyStatementOrderByRelationAggregateInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
 }
 
 export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -357,6 +359,7 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   meters?: Prisma.MeterListRelationFilter
   meterReadings?: Prisma.MeterReadingListRelationFilter
   monthlyStatements?: Prisma.MonthlyStatementListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
 }, "id">
 
 export type PropertyOrderByWithAggregationInput = {
@@ -424,6 +427,7 @@ export type PropertyCreateInput = {
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateInput = {
@@ -447,6 +451,7 @@ export type PropertyUncheckedCreateInput = {
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUpdateInput = {
@@ -470,6 +475,7 @@ export type PropertyUpdateInput = {
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateInput = {
@@ -493,6 +499,7 @@ export type PropertyUncheckedUpdateInput = {
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyInput = {
@@ -763,6 +770,20 @@ export type PropertyUpdateOneRequiredWithoutMonthlyStatementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutMonthlyStatementsInput, Prisma.PropertyUpdateWithoutMonthlyStatementsInput>, Prisma.PropertyUncheckedUpdateWithoutMonthlyStatementsInput>
 }
 
+export type PropertyCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutPaymentsInput, Prisma.PropertyUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.PropertyWhereUniqueInput
+}
+
+export type PropertyUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutPaymentsInput, Prisma.PropertyUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.PropertyUpsertWithoutPaymentsInput
+  connect?: Prisma.PropertyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutPaymentsInput, Prisma.PropertyUpdateWithoutPaymentsInput>, Prisma.PropertyUncheckedUpdateWithoutPaymentsInput>
+}
+
 export type PropertyCreateWithoutUserInput = {
   id?: string
   name: string
@@ -783,6 +804,7 @@ export type PropertyCreateWithoutUserInput = {
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutUserInput = {
@@ -805,6 +827,7 @@ export type PropertyUncheckedCreateWithoutUserInput = {
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutUserInput = {
@@ -874,6 +897,7 @@ export type PropertyCreateWithoutAgreementsInput = {
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutAgreementsInput = {
@@ -896,6 +920,7 @@ export type PropertyUncheckedCreateWithoutAgreementsInput = {
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutAgreementsInput = {
@@ -934,6 +959,7 @@ export type PropertyUpdateWithoutAgreementsInput = {
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutAgreementsInput = {
@@ -956,6 +982,7 @@ export type PropertyUncheckedUpdateWithoutAgreementsInput = {
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutUtilityConfigsInput = {
@@ -978,6 +1005,7 @@ export type PropertyCreateWithoutUtilityConfigsInput = {
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutUtilityConfigsInput = {
@@ -1000,6 +1028,7 @@ export type PropertyUncheckedCreateWithoutUtilityConfigsInput = {
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutUtilityConfigsInput = {
@@ -1038,6 +1067,7 @@ export type PropertyUpdateWithoutUtilityConfigsInput = {
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutUtilityConfigsInput = {
@@ -1060,6 +1090,7 @@ export type PropertyUncheckedUpdateWithoutUtilityConfigsInput = {
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutMetersInput = {
@@ -1082,6 +1113,7 @@ export type PropertyCreateWithoutMetersInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutMetersInput = {
@@ -1104,6 +1136,7 @@ export type PropertyUncheckedCreateWithoutMetersInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutMetersInput = {
@@ -1142,6 +1175,7 @@ export type PropertyUpdateWithoutMetersInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutMetersInput = {
@@ -1164,6 +1198,7 @@ export type PropertyUncheckedUpdateWithoutMetersInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutMeterReadingsInput = {
@@ -1186,6 +1221,7 @@ export type PropertyCreateWithoutMeterReadingsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutPropertyInput
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutMeterReadingsInput = {
@@ -1208,6 +1244,7 @@ export type PropertyUncheckedCreateWithoutMeterReadingsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutPropertyInput
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutMeterReadingsInput = {
@@ -1246,6 +1283,7 @@ export type PropertyUpdateWithoutMeterReadingsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutPropertyNestedInput
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutMeterReadingsInput = {
@@ -1268,6 +1306,7 @@ export type PropertyUncheckedUpdateWithoutMeterReadingsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutPropertyNestedInput
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutMonthlyStatementsInput = {
@@ -1290,6 +1329,7 @@ export type PropertyCreateWithoutMonthlyStatementsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutPropertyInput
   meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutMonthlyStatementsInput = {
@@ -1312,6 +1352,7 @@ export type PropertyUncheckedCreateWithoutMonthlyStatementsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutPropertyInput
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutMonthlyStatementsInput = {
@@ -1350,6 +1391,7 @@ export type PropertyUpdateWithoutMonthlyStatementsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutPropertyNestedInput
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutMonthlyStatementsInput = {
@@ -1372,6 +1414,115 @@ export type PropertyUncheckedUpdateWithoutMonthlyStatementsInput = {
   utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutPropertyNestedInput
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyCreateWithoutPaymentsInput = {
+  id?: string
+  name: string
+  addressLine1: string
+  addressLine2?: string | null
+  city: string
+  country: string
+  postalCode?: string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rooms?: number | null
+  propertyType?: $Enums.PropertyType
+  notes?: string | null
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPropertiesInput
+  agreements?: Prisma.RentalAgreementCreateNestedManyWithoutPropertyInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutPropertyInput
+  meters?: Prisma.MeterCreateNestedManyWithoutPropertyInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutPropertyInput
+  monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  userId: string
+  name: string
+  addressLine1: string
+  addressLine2?: string | null
+  city: string
+  country: string
+  postalCode?: string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rooms?: number | null
+  propertyType?: $Enums.PropertyType
+  notes?: string | null
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutPropertyInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutPropertyInput
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutPropertyInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutPropertyInput
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutPaymentsInput, Prisma.PropertyUncheckedCreateWithoutPaymentsInput>
+}
+
+export type PropertyUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.PropertyUpdateWithoutPaymentsInput, Prisma.PropertyUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutPaymentsInput, Prisma.PropertyUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.PropertyWhereInput
+}
+
+export type PropertyUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.PropertyWhereInput
+  data: Prisma.XOR<Prisma.PropertyUpdateWithoutPaymentsInput, Prisma.PropertyUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type PropertyUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
+  agreements?: Prisma.RentalAgreementUpdateManyWithoutPropertyNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutPropertyNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutPropertyNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutPropertyNestedInput
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyUserInput = {
@@ -1411,6 +1562,7 @@ export type PropertyUpdateWithoutUserInput = {
   meters?: Prisma.MeterUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutUserInput = {
@@ -1433,6 +1585,7 @@ export type PropertyUncheckedUpdateWithoutUserInput = {
   meters?: Prisma.MeterUncheckedUpdateManyWithoutPropertyNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutPropertyNestedInput
   monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutPropertyNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutUserInput = {
@@ -1463,6 +1616,7 @@ export type PropertyCountOutputType = {
   meters: number
   meterReadings: number
   monthlyStatements: number
+  payments: number
 }
 
 export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1471,6 +1625,7 @@ export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   meters?: boolean | PropertyCountOutputTypeCountMetersArgs
   meterReadings?: boolean | PropertyCountOutputTypeCountMeterReadingsArgs
   monthlyStatements?: boolean | PropertyCountOutputTypeCountMonthlyStatementsArgs
+  payments?: boolean | PropertyCountOutputTypeCountPaymentsArgs
 }
 
 /**
@@ -1518,6 +1673,13 @@ export type PropertyCountOutputTypeCountMonthlyStatementsArgs<ExtArgs extends ru
   where?: Prisma.MonthlyStatementWhereInput
 }
 
+/**
+ * PropertyCountOutputType without action
+ */
+export type PropertyCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
 
 export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1541,6 +1703,7 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   meters?: boolean | Prisma.Property$metersArgs<ExtArgs>
   meterReadings?: boolean | Prisma.Property$meterReadingsArgs<ExtArgs>
   monthlyStatements?: boolean | Prisma.Property$monthlyStatementsArgs<ExtArgs>
+  payments?: boolean | Prisma.Property$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
@@ -1608,6 +1771,7 @@ export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   meters?: boolean | Prisma.Property$metersArgs<ExtArgs>
   meterReadings?: boolean | Prisma.Property$meterReadingsArgs<ExtArgs>
   monthlyStatements?: boolean | Prisma.Property$monthlyStatementsArgs<ExtArgs>
+  payments?: boolean | Prisma.Property$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1626,6 +1790,7 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     meters: Prisma.$MeterPayload<ExtArgs>[]
     meterReadings: Prisma.$MeterReadingPayload<ExtArgs>[]
     monthlyStatements: Prisma.$MonthlyStatementPayload<ExtArgs>[]
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2043,6 +2208,7 @@ export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime
   meters<T extends Prisma.Property$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meterReadings<T extends Prisma.Property$meterReadingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$meterReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   monthlyStatements<T extends Prisma.Property$monthlyStatementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$monthlyStatementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MonthlyStatementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.Property$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2605,6 +2771,30 @@ export type Property$monthlyStatementsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.MonthlyStatementScalarFieldEnum | Prisma.MonthlyStatementScalarFieldEnum[]
+}
+
+/**
+ * Property.payments
+ */
+export type Property$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**

@@ -15,6 +15,7 @@ export async function listMonthlyStatements(userId: string) {
       property: true,
       tenant: true,
       items: true,
+      payments: true,
     },
     orderBy: [{ periodYear: 'desc' }, { periodMonth: 'desc' }],
   });
@@ -35,6 +36,9 @@ export async function getMonthlyStatement(userId: string, statementId: string) {
           utilityType: true,
         },
         orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+      },
+      payments: {
+        orderBy: [{ paidAt: 'desc' }, { createdAt: 'desc' }],
       },
     },
   });

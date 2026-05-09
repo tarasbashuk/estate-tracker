@@ -60,7 +60,8 @@ export const ModelName = {
   Meter: 'Meter',
   MeterReading: 'MeterReading',
   MonthlyStatement: 'MonthlyStatement',
-  MonthlyStatementItem: 'MonthlyStatementItem'
+  MonthlyStatementItem: 'MonthlyStatementItem',
+  Payment: 'Payment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -258,6 +259,25 @@ export const MonthlyStatementItemScalarFieldEnum = {
 } as const
 
 export type MonthlyStatementItemScalarFieldEnum = (typeof MonthlyStatementItemScalarFieldEnum)[keyof typeof MonthlyStatementItemScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monthlyStatementId: 'monthlyStatementId',
+  propertyId: 'propertyId',
+  tenantId: 'tenantId',
+  amount: 'amount',
+  currency: 'currency',
+  category: 'category',
+  method: 'method',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const SortOrder = {
