@@ -37,3 +37,13 @@ export type Tenant = Prisma.TenantModel
  * 
  */
 export type RentalAgreement = Prisma.RentalAgreementModel
+/**
+ * Model UtilityType
+ * 
+ */
+export type UtilityType = Prisma.UtilityTypeModel
+/**
+ * Model PropertyUtilityConfig
+ * 
+ */
+export type PropertyUtilityConfig = Prisma.PropertyUtilityConfigModel

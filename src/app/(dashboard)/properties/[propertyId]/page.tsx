@@ -17,6 +17,11 @@ import { EditPropertyForm } from '@/features/properties/components/EditPropertyF
 import { getProperty } from '@/features/properties/service';
 import type { PropertyFormValues } from '@/features/properties/schemas';
 import { listTenants } from '@/features/tenants/service';
+import { PropertyUtilitiesSection } from '@/features/utilities/components/PropertyUtilitiesSection';
+import {
+  listPropertyUtilityConfigs,
+  listUtilityTypes,
+} from '@/features/utilities/service';
 import { requireUser } from '@/server/requireUser';
 
 const propertyTypeLabels = {
@@ -35,15 +40,18 @@ export default async function PropertyDetailsPage({
 }) {
   const { propertyId } = await params;
   const user = await requireUser();
-  const [property, agreements, tenants] = await Promise.all([
-    getProperty(user.id, propertyId),
-    listRentalAgreementsForProperty(user.id, propertyId),
-    listTenants(user.id),
-  ]);
+  const property = await getProperty(user.id, propertyId);
 
   if (!property) {
     notFound();
   }
+
+  const [agreements, tenants, utilityConfigs, utilityTypes] = await Promise.all([
+    listRentalAgreementsForProperty(user.id, propertyId),
+    listTenants(user.id),
+    listPropertyUtilityConfigs(user.id, propertyId),
+    listUtilityTypes(user.id),
+  ]);
 
   const formDefaults: PropertyFormValues = {
     name: property.name,
@@ -60,6 +68,10 @@ export default async function PropertyDetailsPage({
   const tenantOptions = tenants.map((tenant) => ({
     id: tenant.id,
     fullName: tenant.fullName,
+  }));
+  const utilityTypeOptions = utilityTypes.map((utilityType) => ({
+    id: utilityType.id,
+    name: utilityType.name,
   }));
 
   return (
@@ -125,6 +137,12 @@ export default async function PropertyDetailsPage({
         agreements={agreements}
         property={{ id: property.id, name: property.name }}
         tenants={tenantOptions}
+      />
+
+      <PropertyUtilitiesSection
+        propertyId={property.id}
+        configs={utilityConfigs}
+        utilityTypes={utilityTypeOptions}
       />
 
       <EditPropertyForm propertyId={property.id} defaultValues={formDefaults} />

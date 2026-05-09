@@ -54,7 +54,9 @@ export const ModelName = {
   User: 'User',
   Property: 'Property',
   Tenant: 'Tenant',
-  RentalAgreement: 'RentalAgreement'
+  RentalAgreement: 'RentalAgreement',
+  UtilityType: 'UtilityType',
+  PropertyUtilityConfig: 'PropertyUtilityConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -145,6 +147,34 @@ export const RentalAgreementScalarFieldEnum = {
 } as const
 
 export type RentalAgreementScalarFieldEnum = (typeof RentalAgreementScalarFieldEnum)[keyof typeof RentalAgreementScalarFieldEnum]
+
+
+export const UtilityTypeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UtilityTypeScalarFieldEnum = (typeof UtilityTypeScalarFieldEnum)[keyof typeof UtilityTypeScalarFieldEnum]
+
+
+export const PropertyUtilityConfigScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  utilityTypeId: 'utilityTypeId',
+  isEnabled: 'isEnabled',
+  defaultAmount: 'defaultAmount',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyUtilityConfigScalarFieldEnum = (typeof PropertyUtilityConfigScalarFieldEnum)[keyof typeof PropertyUtilityConfigScalarFieldEnum]
 
 
 export const SortOrder = {

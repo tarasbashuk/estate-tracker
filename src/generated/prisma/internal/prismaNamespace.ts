@@ -387,7 +387,9 @@ export const ModelName = {
   User: 'User',
   Property: 'Property',
   Tenant: 'Tenant',
-  RentalAgreement: 'RentalAgreement'
+  RentalAgreement: 'RentalAgreement',
+  UtilityType: 'UtilityType',
+  PropertyUtilityConfig: 'PropertyUtilityConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "property" | "tenant" | "rentalAgreement"
+    modelProps: "user" | "property" | "tenant" | "rentalAgreement" | "utilityType" | "propertyUtilityConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +705,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UtilityType: {
+      payload: Prisma.$UtilityTypePayload<ExtArgs>
+      fields: Prisma.UtilityTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UtilityTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UtilityTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        findFirst: {
+          args: Prisma.UtilityTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UtilityTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        findMany: {
+          args: Prisma.UtilityTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>[]
+        }
+        create: {
+          args: Prisma.UtilityTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        createMany: {
+          args: Prisma.UtilityTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UtilityTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>[]
+        }
+        delete: {
+          args: Prisma.UtilityTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        update: {
+          args: Prisma.UtilityTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.UtilityTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UtilityTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UtilityTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.UtilityTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UtilityTypePayload>
+        }
+        aggregate: {
+          args: Prisma.UtilityTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUtilityType>
+        }
+        groupBy: {
+          args: Prisma.UtilityTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UtilityTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UtilityTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UtilityTypeCountAggregateOutputType> | number
+        }
+      }
+    }
+    PropertyUtilityConfig: {
+      payload: Prisma.$PropertyUtilityConfigPayload<ExtArgs>
+      fields: Prisma.PropertyUtilityConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PropertyUtilityConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PropertyUtilityConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.PropertyUtilityConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PropertyUtilityConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        findMany: {
+          args: Prisma.PropertyUtilityConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>[]
+        }
+        create: {
+          args: Prisma.PropertyUtilityConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        createMany: {
+          args: Prisma.PropertyUtilityConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PropertyUtilityConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.PropertyUtilityConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        update: {
+          args: Prisma.PropertyUtilityConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.PropertyUtilityConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PropertyUtilityConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PropertyUtilityConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.PropertyUtilityConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyUtilityConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.PropertyUtilityConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePropertyUtilityConfig>
+        }
+        groupBy: {
+          args: Prisma.PropertyUtilityConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyUtilityConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PropertyUtilityConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyUtilityConfigCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -814,6 +964,34 @@ export const RentalAgreementScalarFieldEnum = {
 } as const
 
 export type RentalAgreementScalarFieldEnum = (typeof RentalAgreementScalarFieldEnum)[keyof typeof RentalAgreementScalarFieldEnum]
+
+
+export const UtilityTypeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UtilityTypeScalarFieldEnum = (typeof UtilityTypeScalarFieldEnum)[keyof typeof UtilityTypeScalarFieldEnum]
+
+
+export const PropertyUtilityConfigScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  utilityTypeId: 'utilityTypeId',
+  isEnabled: 'isEnabled',
+  defaultAmount: 'defaultAmount',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyUtilityConfigScalarFieldEnum = (typeof PropertyUtilityConfigScalarFieldEnum)[keyof typeof PropertyUtilityConfigScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1092,6 +1270,8 @@ export type GlobalOmitConfig = {
   property?: Prisma.PropertyOmit
   tenant?: Prisma.TenantOmit
   rentalAgreement?: Prisma.RentalAgreementOmit
+  utilityType?: Prisma.UtilityTypeOmit
+  propertyUtilityConfig?: Prisma.PropertyUtilityConfigOmit
 }
 
 /* Types for Logging */

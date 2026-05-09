@@ -217,6 +217,8 @@ export type UserWhereInput = {
   properties?: Prisma.PropertyListRelationFilter
   tenants?: Prisma.TenantListRelationFilter
   agreements?: Prisma.RentalAgreementListRelationFilter
+  utilityTypes?: Prisma.UtilityTypeListRelationFilter
+  utilityConfigs?: Prisma.PropertyUtilityConfigListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +234,8 @@ export type UserOrderByWithRelationInput = {
   properties?: Prisma.PropertyOrderByRelationAggregateInput
   tenants?: Prisma.TenantOrderByRelationAggregateInput
   agreements?: Prisma.RentalAgreementOrderByRelationAggregateInput
+  utilityTypes?: Prisma.UtilityTypeOrderByRelationAggregateInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +254,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   properties?: Prisma.PropertyListRelationFilter
   tenants?: Prisma.TenantListRelationFilter
   agreements?: Prisma.RentalAgreementListRelationFilter
+  utilityTypes?: Prisma.UtilityTypeListRelationFilter
+  utilityConfigs?: Prisma.PropertyUtilityConfigListRelationFilter
 }, "id" | "clerkUserId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -295,6 +301,8 @@ export type UserCreateInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutUserInput
   tenants?: Prisma.TenantCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -310,6 +318,8 @@ export type UserUncheckedCreateInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutUserInput
   tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +335,8 @@ export type UserUpdateInput = {
   properties?: Prisma.PropertyUpdateManyWithoutUserNestedInput
   tenants?: Prisma.TenantUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -340,6 +352,8 @@ export type UserUncheckedUpdateInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutUserNestedInput
   tenants?: Prisma.TenantUncheckedUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -419,6 +433,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -473,6 +492,36 @@ export type UserUpdateOneRequiredWithoutAgreementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAgreementsInput, Prisma.UserUpdateWithoutAgreementsInput>, Prisma.UserUncheckedUpdateWithoutAgreementsInput>
 }
 
+export type UserCreateNestedOneWithoutUtilityTypesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUtilityTypesInput, Prisma.UserUncheckedCreateWithoutUtilityTypesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUtilityTypesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutUtilityTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUtilityTypesInput, Prisma.UserUncheckedCreateWithoutUtilityTypesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUtilityTypesInput
+  upsert?: Prisma.UserUpsertWithoutUtilityTypesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUtilityTypesInput, Prisma.UserUpdateWithoutUtilityTypesInput>, Prisma.UserUncheckedUpdateWithoutUtilityTypesInput>
+}
+
+export type UserCreateNestedOneWithoutUtilityConfigsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUtilityConfigsInput, Prisma.UserUncheckedCreateWithoutUtilityConfigsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUtilityConfigsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUtilityConfigsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUtilityConfigsInput, Prisma.UserUncheckedCreateWithoutUtilityConfigsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUtilityConfigsInput
+  upsert?: Prisma.UserUpsertWithoutUtilityConfigsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUtilityConfigsInput, Prisma.UserUpdateWithoutUtilityConfigsInput>, Prisma.UserUncheckedUpdateWithoutUtilityConfigsInput>
+}
+
 export type UserCreateWithoutPropertiesInput = {
   id?: string
   clerkUserId: string
@@ -485,6 +534,8 @@ export type UserCreateWithoutPropertiesInput = {
   updatedAt?: Date | string
   tenants?: Prisma.TenantCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPropertiesInput = {
@@ -499,6 +550,8 @@ export type UserUncheckedCreateWithoutPropertiesInput = {
   updatedAt?: Date | string
   tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPropertiesInput = {
@@ -529,6 +582,8 @@ export type UserUpdateWithoutPropertiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenants?: Prisma.TenantUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPropertiesInput = {
@@ -543,6 +598,8 @@ export type UserUncheckedUpdateWithoutPropertiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenants?: Prisma.TenantUncheckedUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTenantsInput = {
@@ -557,6 +614,8 @@ export type UserCreateWithoutTenantsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTenantsInput = {
@@ -571,6 +630,8 @@ export type UserUncheckedCreateWithoutTenantsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutUserInput
   agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTenantsInput = {
@@ -601,6 +662,8 @@ export type UserUpdateWithoutTenantsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTenantsInput = {
@@ -615,6 +678,8 @@ export type UserUncheckedUpdateWithoutTenantsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutUserNestedInput
   agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAgreementsInput = {
@@ -629,6 +694,8 @@ export type UserCreateWithoutAgreementsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutUserInput
   tenants?: Prisma.TenantCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAgreementsInput = {
@@ -643,6 +710,8 @@ export type UserUncheckedCreateWithoutAgreementsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutUserInput
   tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAgreementsInput = {
@@ -673,6 +742,8 @@ export type UserUpdateWithoutAgreementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutUserNestedInput
   tenants?: Prisma.TenantUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgreementsInput = {
@@ -687,6 +758,168 @@ export type UserUncheckedUpdateWithoutAgreementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutUserNestedInput
   tenants?: Prisma.TenantUncheckedUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUtilityTypesInput = {
+  id?: string
+  clerkUserId: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  fullName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyCreateNestedManyWithoutUserInput
+  tenants?: Prisma.TenantCreateNestedManyWithoutUserInput
+  agreements?: Prisma.RentalAgreementCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUtilityTypesInput = {
+  id?: string
+  clerkUserId: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  fullName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutUserInput
+  tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUserInput
+  agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutUserInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUtilityTypesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUtilityTypesInput, Prisma.UserUncheckedCreateWithoutUtilityTypesInput>
+}
+
+export type UserUpsertWithoutUtilityTypesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUtilityTypesInput, Prisma.UserUncheckedUpdateWithoutUtilityTypesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUtilityTypesInput, Prisma.UserUncheckedCreateWithoutUtilityTypesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUtilityTypesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUtilityTypesInput, Prisma.UserUncheckedUpdateWithoutUtilityTypesInput>
+}
+
+export type UserUpdateWithoutUtilityTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUpdateManyWithoutUserNestedInput
+  tenants?: Prisma.TenantUpdateManyWithoutUserNestedInput
+  agreements?: Prisma.RentalAgreementUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUtilityTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutUserNestedInput
+  tenants?: Prisma.TenantUncheckedUpdateManyWithoutUserNestedInput
+  agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutUserNestedInput
+  utilityConfigs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUtilityConfigsInput = {
+  id?: string
+  clerkUserId: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  fullName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyCreateNestedManyWithoutUserInput
+  tenants?: Prisma.TenantCreateNestedManyWithoutUserInput
+  agreements?: Prisma.RentalAgreementCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUtilityConfigsInput = {
+  id?: string
+  clerkUserId: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  fullName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutUserInput
+  tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUserInput
+  agreements?: Prisma.RentalAgreementUncheckedCreateNestedManyWithoutUserInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUtilityConfigsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUtilityConfigsInput, Prisma.UserUncheckedCreateWithoutUtilityConfigsInput>
+}
+
+export type UserUpsertWithoutUtilityConfigsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUtilityConfigsInput, Prisma.UserUncheckedUpdateWithoutUtilityConfigsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUtilityConfigsInput, Prisma.UserUncheckedCreateWithoutUtilityConfigsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUtilityConfigsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUtilityConfigsInput, Prisma.UserUncheckedUpdateWithoutUtilityConfigsInput>
+}
+
+export type UserUpdateWithoutUtilityConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUpdateManyWithoutUserNestedInput
+  tenants?: Prisma.TenantUpdateManyWithoutUserNestedInput
+  agreements?: Prisma.RentalAgreementUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUtilityConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutUserNestedInput
+  tenants?: Prisma.TenantUncheckedUpdateManyWithoutUserNestedInput
+  agreements?: Prisma.RentalAgreementUncheckedUpdateManyWithoutUserNestedInput
+  utilityTypes?: Prisma.UtilityTypeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -698,12 +931,16 @@ export type UserCountOutputType = {
   properties: number
   tenants: number
   agreements: number
+  utilityTypes: number
+  utilityConfigs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   properties?: boolean | UserCountOutputTypeCountPropertiesArgs
   tenants?: boolean | UserCountOutputTypeCountTenantsArgs
   agreements?: boolean | UserCountOutputTypeCountAgreementsArgs
+  utilityTypes?: boolean | UserCountOutputTypeCountUtilityTypesArgs
+  utilityConfigs?: boolean | UserCountOutputTypeCountUtilityConfigsArgs
 }
 
 /**
@@ -737,6 +974,20 @@ export type UserCountOutputTypeCountAgreementsArgs<ExtArgs extends runtime.Types
   where?: Prisma.RentalAgreementWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUtilityTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UtilityTypeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUtilityConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PropertyUtilityConfigWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -751,6 +1002,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   properties?: boolean | Prisma.User$propertiesArgs<ExtArgs>
   tenants?: boolean | Prisma.User$tenantsArgs<ExtArgs>
   agreements?: boolean | Prisma.User$agreementsArgs<ExtArgs>
+  utilityTypes?: boolean | Prisma.User$utilityTypesArgs<ExtArgs>
+  utilityConfigs?: boolean | Prisma.User$utilityConfigsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -795,6 +1048,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   properties?: boolean | Prisma.User$propertiesArgs<ExtArgs>
   tenants?: boolean | Prisma.User$tenantsArgs<ExtArgs>
   agreements?: boolean | Prisma.User$agreementsArgs<ExtArgs>
+  utilityTypes?: boolean | Prisma.User$utilityTypesArgs<ExtArgs>
+  utilityConfigs?: boolean | Prisma.User$utilityConfigsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -806,6 +1061,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     properties: Prisma.$PropertyPayload<ExtArgs>[]
     tenants: Prisma.$TenantPayload<ExtArgs>[]
     agreements: Prisma.$RentalAgreementPayload<ExtArgs>[]
+    utilityTypes: Prisma.$UtilityTypePayload<ExtArgs>[]
+    utilityConfigs: Prisma.$PropertyUtilityConfigPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1214,6 +1471,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   properties<T extends Prisma.User$propertiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tenants<T extends Prisma.User$tenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   agreements<T extends Prisma.User$agreementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$agreementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalAgreementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  utilityTypes<T extends Prisma.User$utilityTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$utilityTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  utilityConfigs<T extends Prisma.User$utilityConfigsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$utilityConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyUtilityConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1714,6 +1973,54 @@ export type User$agreementsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.RentalAgreementScalarFieldEnum | Prisma.RentalAgreementScalarFieldEnum[]
+}
+
+/**
+ * User.utilityTypes
+ */
+export type User$utilityTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UtilityType
+   */
+  select?: Prisma.UtilityTypeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UtilityType
+   */
+  omit?: Prisma.UtilityTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UtilityTypeInclude<ExtArgs> | null
+  where?: Prisma.UtilityTypeWhereInput
+  orderBy?: Prisma.UtilityTypeOrderByWithRelationInput | Prisma.UtilityTypeOrderByWithRelationInput[]
+  cursor?: Prisma.UtilityTypeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UtilityTypeScalarFieldEnum | Prisma.UtilityTypeScalarFieldEnum[]
+}
+
+/**
+ * User.utilityConfigs
+ */
+export type User$utilityConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PropertyUtilityConfig
+   */
+  select?: Prisma.PropertyUtilityConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PropertyUtilityConfig
+   */
+  omit?: Prisma.PropertyUtilityConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyUtilityConfigInclude<ExtArgs> | null
+  where?: Prisma.PropertyUtilityConfigWhereInput
+  orderBy?: Prisma.PropertyUtilityConfigOrderByWithRelationInput | Prisma.PropertyUtilityConfigOrderByWithRelationInput[]
+  cursor?: Prisma.PropertyUtilityConfigWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PropertyUtilityConfigScalarFieldEnum | Prisma.PropertyUtilityConfigScalarFieldEnum[]
 }
 
 /**
