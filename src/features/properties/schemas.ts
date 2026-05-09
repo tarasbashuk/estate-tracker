@@ -14,12 +14,9 @@ export const propertySchema = z.object({
   city: z.string().trim().min(1, 'City is required').max(100),
   country: z.string().trim().min(1, 'Country is required').max(100),
   postalCode: z.string().trim().max(30).optional().or(z.literal('')),
-  area: z
-    .number({ invalid_type_error: 'Area must be a number' })
-    .positive('Area must be greater than zero')
-    .optional(),
+  area: z.number('Area must be a number').positive('Area must be greater than zero').optional(),
   rooms: z
-    .number({ invalid_type_error: 'Rooms must be a number' })
+    .number('Rooms must be a number')
     .int('Rooms must be a whole number')
     .positive('Rooms must be greater than zero')
     .optional(),
@@ -34,4 +31,3 @@ export type PropertyActionState = {
   formError?: string;
   fieldErrors?: Partial<Record<keyof PropertyFormValues, string>>;
 };
-

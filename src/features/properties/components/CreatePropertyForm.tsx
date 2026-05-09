@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import {
   Alert,
+  Box,
   Button,
-  Grid,
   MenuItem,
   Paper,
   Stack,
@@ -94,8 +94,14 @@ export function CreatePropertyForm() {
           <Alert severity="error">{errors.root.message}</Alert>
         )}
 
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 2,
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+          }}
+        >
+          <Box>
             <TextField
               label="Property name"
               fullWidth
@@ -105,8 +111,8 @@ export function CreatePropertyForm() {
               helperText={errors.name?.message}
               {...register('name')}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <TextField
               label="Property type"
               select
@@ -122,8 +128,8 @@ export function CreatePropertyForm() {
                 </MenuItem>
               ))}
             </TextField>
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField
               label="Address line 1"
               fullWidth
@@ -133,8 +139,8 @@ export function CreatePropertyForm() {
               helperText={errors.addressLine1?.message}
               {...register('addressLine1')}
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField
               label="Address line 2"
               fullWidth
@@ -143,8 +149,8 @@ export function CreatePropertyForm() {
               helperText={errors.addressLine2?.message}
               {...register('addressLine2')}
             />
-          </Grid>
-          <Grid item xs={12} sm={4}>
+          </Box>
+          <Box>
             <TextField
               label="City"
               fullWidth
@@ -154,8 +160,8 @@ export function CreatePropertyForm() {
               helperText={errors.city?.message}
               {...register('city')}
             />
-          </Grid>
-          <Grid item xs={12} sm={4}>
+          </Box>
+          <Box>
             <TextField
               label="Country"
               fullWidth
@@ -165,8 +171,8 @@ export function CreatePropertyForm() {
               helperText={errors.country?.message}
               {...register('country')}
             />
-          </Grid>
-          <Grid item xs={12} sm={4}>
+          </Box>
+          <Box>
             <TextField
               label="Postal code"
               fullWidth
@@ -175,14 +181,14 @@ export function CreatePropertyForm() {
               helperText={errors.postalCode?.message}
               {...register('postalCode')}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <TextField
               label="Area"
               type="number"
               fullWidth
               disabled={isPending}
-              inputProps={{ min: 0, step: '0.01' }}
+              slotProps={{ htmlInput: { min: 0, step: '0.01' } }}
               error={Boolean(errors.area)}
               helperText={errors.area?.message}
               {...register('area', {
@@ -190,14 +196,14 @@ export function CreatePropertyForm() {
                   value === '' || value === null ? undefined : Number(value),
               })}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <TextField
               label="Rooms"
               type="number"
               fullWidth
               disabled={isPending}
-              inputProps={{ min: 1, step: 1 }}
+              slotProps={{ htmlInput: { min: 1, step: 1 } }}
               error={Boolean(errors.rooms)}
               helperText={errors.rooms?.message}
               {...register('rooms', {
@@ -205,8 +211,8 @@ export function CreatePropertyForm() {
                   value === '' || value === null ? undefined : Number(value),
               })}
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField
               label="Notes"
               fullWidth
@@ -217,10 +223,10 @@ export function CreatePropertyForm() {
               helperText={errors.notes?.message}
               {...register('notes')}
             />
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
 
-        <Stack direction="row" justifyContent="flex-end">
+        <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
           <Button type="submit" variant="contained" disabled={isPending}>
             {isPending ? 'Saving...' : 'Create property'}
           </Button>
@@ -246,4 +252,3 @@ function applyActionErrors(
     });
   }
 }
-

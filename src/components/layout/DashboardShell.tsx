@@ -39,7 +39,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" fontWeight={700}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Estate Tracker
           </Typography>
         </Toolbar>
@@ -74,9 +74,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           <Toolbar>
             <Stack
               direction="row"
-              alignItems="center"
               spacing={2}
-              sx={{ width: '100%' }}
+              sx={{ width: '100%', alignItems: 'center' }}
             >
               <Typography
                 variant="h6"
@@ -97,4 +96,3 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     </Box>
   );
 }
-

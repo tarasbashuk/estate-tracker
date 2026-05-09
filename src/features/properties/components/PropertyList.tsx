@@ -1,4 +1,4 @@
-import { Property } from '@prisma/client';
+import { Property } from '@/generated/prisma/client';
 import {
   Chip,
   Paper,
@@ -48,7 +48,9 @@ export function PropertyList({ properties }: { properties: Property[] }) {
             <TableRow key={property.id} hover>
               <TableCell>
                 <Stack spacing={0.5}>
-                  <Typography fontWeight={600}>{property.name}</Typography>
+                  <Typography sx={{ fontWeight: 600 }}>
+                    {property.name}
+                  </Typography>
                   {property.notes ? (
                     <Typography variant="body2" color="text.secondary">
                       {property.notes}
@@ -84,4 +86,3 @@ export function PropertyList({ properties }: { properties: Property[] }) {
     </TableContainer>
   );
 }
-

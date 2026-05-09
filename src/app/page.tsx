@@ -1,8 +1,11 @@
-import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
+import { SignInButton } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const user = await currentUser();
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -21,14 +24,7 @@ export default function HomePage() {
             Private rental property management for properties, tenants,
             statements, payments, and operational tasks.
           </Typography>
-          <SignedOut>
-            <SignInButton mode="modal">
-              <Button variant="contained" size="large">
-                Sign in
-              </Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
+          {user ? (
             <Button
               component={Link}
               href="/properties"
@@ -37,10 +33,15 @@ export default function HomePage() {
             >
               Open dashboard
             </Button>
-          </SignedIn>
+          ) : (
+            <SignInButton mode="modal">
+              <Button variant="contained" size="large">
+                Sign in
+              </Button>
+            </SignInButton>
+          )}
         </Stack>
       </Box>
     </Container>
   );
 }
-

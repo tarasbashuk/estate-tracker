@@ -1,4 +1,4 @@
-import { Prisma, PropertyType } from '@prisma/client';
+import { Prisma, PropertyType } from '@/generated/prisma/client';
 
 import { db } from '@/lib/db';
 import type { PropertyFormValues } from './schemas';
@@ -42,4 +42,3 @@ function emptyToNull(value?: string) {
 
   return trimmed ? trimmed : null;
 }
-
