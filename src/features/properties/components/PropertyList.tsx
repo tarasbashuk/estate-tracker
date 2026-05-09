@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import { Property } from '@/generated/prisma/client';
 import {
+  Button,
   Chip,
   Paper,
   Stack,
@@ -48,9 +50,20 @@ export function PropertyList({ properties }: { properties: Property[] }) {
             <TableRow key={property.id} hover>
               <TableCell>
                 <Stack spacing={0.5}>
-                  <Typography sx={{ fontWeight: 600 }}>
+                  <Button
+                    component={Link}
+                    href={`/properties/${property.id}`}
+                    sx={{
+                      alignSelf: 'flex-start',
+                      p: 0,
+                      minWidth: 0,
+                      textAlign: 'left',
+                      textTransform: 'none',
+                      fontWeight: 600,
+                    }}
+                  >
                     {property.name}
-                  </Typography>
+                  </Button>
                   {property.notes ? (
                     <Typography variant="body2" color="text.secondary">
                       {property.notes}

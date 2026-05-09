@@ -31,7 +31,33 @@ const propertyTypeLabels: Record<(typeof propertyTypeValues)[number], string> =
     OTHER: 'Other',
   };
 
-export function CreatePropertyForm() {
+type PropertyFormProps = {
+  defaultValues?: Partial<PropertyFormValues>;
+  submitLabel?: string;
+  title?: string;
+  description?: string;
+  onSubmitAction?: (values: PropertyFormValues) => Promise<PropertyActionState>;
+};
+
+const defaultPropertyValues: PropertyFormValues = {
+  name: '',
+  addressLine1: '',
+  addressLine2: '',
+  city: '',
+  country: 'Ukraine',
+  postalCode: '',
+  propertyType: 'APARTMENT',
+  notes: '',
+};
+
+export function CreatePropertyForm(props: PropertyFormProps = {}) {
+  const {
+    defaultValues,
+    submitLabel = 'Create property',
+    title = 'Add property',
+    description = 'Add the basic property details. Tenant and agreement setup comes later.',
+    onSubmitAction = createPropertyAction,
+  } = props;
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const {
@@ -43,27 +69,21 @@ export function CreatePropertyForm() {
   } = useForm<PropertyFormValues>({
     resolver: zodResolver(propertySchema),
     defaultValues: {
-      name: '',
-      addressLine1: '',
-      addressLine2: '',
-      city: '',
-      country: 'Ukraine',
-      postalCode: '',
-      propertyType: 'APARTMENT',
-      notes: '',
+      ...defaultPropertyValues,
+      ...defaultValues,
     },
   });
 
   const onSubmit = handleSubmit((values) => {
     startTransition(async () => {
-      const result = await createPropertyAction(values);
+      const result = await onSubmitAction(values);
 
       if (!result.ok) {
         applyActionErrors(result, setError);
         return;
       }
 
-      reset();
+      reset({ ...defaultPropertyValues, ...defaultValues });
       router.refresh();
     });
   });
@@ -82,11 +102,10 @@ export function CreatePropertyForm() {
       <Stack spacing={3}>
         <Stack spacing={0.5}>
           <Typography variant="h6" component="h2">
-            Add property
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Add the basic property details. Tenant and agreement setup comes
-            later.
+            {description}
           </Typography>
         </Stack>
 
@@ -228,7 +247,7 @@ export function CreatePropertyForm() {
 
         <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
           <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending ? 'Saving...' : 'Create property'}
+            {isPending ? 'Saving...' : submitLabel}
           </Button>
         </Stack>
       </Stack>
