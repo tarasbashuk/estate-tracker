@@ -16,10 +16,12 @@ import {
 import { PaymentHistory } from '@/features/payments/components/PaymentHistory';
 import { PaymentSummary } from '@/features/payments/components/PaymentSummary';
 import { StatementStatusChip } from '@/features/statements/components/StatementStatusChip';
+import { TenantStatementPanel } from '@/features/statements/components/TenantStatementPanel';
 import {
   calculateStatementTotal,
   getMonthlyStatement,
 } from '@/features/statements/service';
+import { generateTenantStatementMessage } from '@/features/statements/tenantSummary';
 import { requireUser } from '@/server/requireUser';
 
 export const dynamic = 'force-dynamic';
@@ -38,24 +40,31 @@ export default async function StatementDetailsPage({
   }
 
   const total = calculateStatementTotal(statement.items);
+  const tenantMessage = generateTenantStatementMessage(statement);
 
   return (
     <Stack spacing={3}>
-      <Stack spacing={1}>
-        <Link href="/statements">
-          <Button sx={{ alignSelf: 'flex-start', p: 0, minWidth: 0 }}>
-            Back to statements
-          </Button>
-        </Link>
-        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-          <Typography variant="h4" component="h1">
-            {statement.periodMonth}/{statement.periodYear}
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={2}
+        sx={{ justifyContent: 'space-between' }}
+      >
+        <Stack spacing={1}>
+          <Link href="/statements">
+            <Button sx={{ alignSelf: 'flex-start', p: 0, minWidth: 0 }}>
+              Back to statements
+            </Button>
+          </Link>
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+            <Typography variant="h4" component="h1">
+              {statement.periodMonth}/{statement.periodYear}
+            </Typography>
+            <StatementStatusChip status={statement.status} />
+          </Stack>
+          <Typography color="text.secondary">
+            {statement.property.name} · {statement.tenant.fullName}
           </Typography>
-          <StatementStatusChip status={statement.status} />
         </Stack>
-        <Typography color="text.secondary">
-          {statement.property.name} · {statement.tenant.fullName}
-        </Typography>
       </Stack>
 
       <Paper
@@ -77,6 +86,11 @@ export default async function StatementDetailsPage({
           <DetailRow label="Notes" value={statement.notes} />
         </Stack>
       </Paper>
+
+      <TenantStatementPanel
+        statementId={statement.id}
+        message={tenantMessage}
+      />
 
       <PaymentSummary statement={statement} />
 
