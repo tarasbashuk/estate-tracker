@@ -70,3 +70,24 @@ export const MeterReadingStatus = {
 } as const
 
 export type MeterReadingStatus = (typeof MeterReadingStatus)[keyof typeof MeterReadingStatus]
+
+
+export const StatementStatus = {
+  DRAFT: 'DRAFT',
+  READY_TO_SEND: 'READY_TO_SEND',
+  SENT: 'SENT',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type StatementStatus = (typeof StatementStatus)[keyof typeof StatementStatus]
+
+
+export const StatementItemType = {
+  RENT: 'RENT',
+  UTILITY: 'UTILITY',
+  CUSTOM: 'CUSTOM',
+  DISCOUNT: 'DISCOUNT',
+  ADJUSTMENT: 'ADJUSTMENT'
+} as const
+
+export type StatementItemType = (typeof StatementItemType)[keyof typeof StatementItemType]

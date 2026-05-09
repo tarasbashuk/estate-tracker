@@ -57,3 +57,13 @@ export type Meter = Prisma.MeterModel
  * 
  */
 export type MeterReading = Prisma.MeterReadingModel
+/**
+ * Model MonthlyStatement
+ * 
+ */
+export type MonthlyStatement = Prisma.MonthlyStatementModel
+/**
+ * Model MonthlyStatementItem
+ * 
+ */
+export type MonthlyStatementItem = Prisma.MonthlyStatementItemModel

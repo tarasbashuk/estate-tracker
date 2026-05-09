@@ -201,6 +201,7 @@ export type UtilityTypeWhereInput = {
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   configs?: Prisma.PropertyUtilityConfigListRelationFilter
   meters?: Prisma.MeterListRelationFilter
+  statementItems?: Prisma.MonthlyStatementItemListRelationFilter
 }
 
 export type UtilityTypeOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type UtilityTypeOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   configs?: Prisma.PropertyUtilityConfigOrderByRelationAggregateInput
   meters?: Prisma.MeterOrderByRelationAggregateInput
+  statementItems?: Prisma.MonthlyStatementItemOrderByRelationAggregateInput
 }
 
 export type UtilityTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +233,7 @@ export type UtilityTypeWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   configs?: Prisma.PropertyUtilityConfigListRelationFilter
   meters?: Prisma.MeterListRelationFilter
+  statementItems?: Prisma.MonthlyStatementItemListRelationFilter
 }, "id" | "userId_name">
 
 export type UtilityTypeOrderByWithAggregationInput = {
@@ -269,6 +272,7 @@ export type UtilityTypeCreateInput = {
   user?: Prisma.UserCreateNestedOneWithoutUtilityTypesInput
   configs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUtilityTypeInput
   meters?: Prisma.MeterCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeUncheckedCreateInput = {
@@ -281,6 +285,7 @@ export type UtilityTypeUncheckedCreateInput = {
   updatedAt?: Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUtilityTypeInput
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeUpdateInput = {
@@ -293,6 +298,7 @@ export type UtilityTypeUpdateInput = {
   user?: Prisma.UserUpdateOneWithoutUtilityTypesNestedInput
   configs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUtilityTypeNestedInput
   meters?: Prisma.MeterUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeUncheckedUpdateInput = {
@@ -305,6 +311,7 @@ export type UtilityTypeUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUtilityTypeNestedInput
   meters?: Prisma.MeterUncheckedUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeCreateManyInput = {
@@ -386,6 +393,11 @@ export type UtilityTypeScalarRelationFilter = {
   isNot?: Prisma.UtilityTypeWhereInput
 }
 
+export type UtilityTypeNullableScalarRelationFilter = {
+  is?: Prisma.UtilityTypeWhereInput | null
+  isNot?: Prisma.UtilityTypeWhereInput | null
+}
+
 export type UtilityTypeCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UtilityTypeCreateWithoutUserInput, Prisma.UtilityTypeUncheckedCreateWithoutUserInput> | Prisma.UtilityTypeCreateWithoutUserInput[] | Prisma.UtilityTypeUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UtilityTypeCreateOrConnectWithoutUserInput | Prisma.UtilityTypeCreateOrConnectWithoutUserInput[]
@@ -456,6 +468,22 @@ export type UtilityTypeUpdateOneRequiredWithoutMetersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UtilityTypeUpdateToOneWithWhereWithoutMetersInput, Prisma.UtilityTypeUpdateWithoutMetersInput>, Prisma.UtilityTypeUncheckedUpdateWithoutMetersInput>
 }
 
+export type UtilityTypeCreateNestedOneWithoutStatementItemsInput = {
+  create?: Prisma.XOR<Prisma.UtilityTypeCreateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedCreateWithoutStatementItemsInput>
+  connectOrCreate?: Prisma.UtilityTypeCreateOrConnectWithoutStatementItemsInput
+  connect?: Prisma.UtilityTypeWhereUniqueInput
+}
+
+export type UtilityTypeUpdateOneWithoutStatementItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UtilityTypeCreateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedCreateWithoutStatementItemsInput>
+  connectOrCreate?: Prisma.UtilityTypeCreateOrConnectWithoutStatementItemsInput
+  upsert?: Prisma.UtilityTypeUpsertWithoutStatementItemsInput
+  disconnect?: Prisma.UtilityTypeWhereInput | boolean
+  delete?: Prisma.UtilityTypeWhereInput | boolean
+  connect?: Prisma.UtilityTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UtilityTypeUpdateToOneWithWhereWithoutStatementItemsInput, Prisma.UtilityTypeUpdateWithoutStatementItemsInput>, Prisma.UtilityTypeUncheckedUpdateWithoutStatementItemsInput>
+}
+
 export type UtilityTypeCreateWithoutUserInput = {
   id?: string
   name: string
@@ -465,6 +493,7 @@ export type UtilityTypeCreateWithoutUserInput = {
   updatedAt?: Date | string
   configs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUtilityTypeInput
   meters?: Prisma.MeterCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeUncheckedCreateWithoutUserInput = {
@@ -476,6 +505,7 @@ export type UtilityTypeUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUtilityTypeInput
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeCreateOrConnectWithoutUserInput = {
@@ -526,6 +556,7 @@ export type UtilityTypeCreateWithoutConfigsInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutUtilityTypesInput
   meters?: Prisma.MeterCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeUncheckedCreateWithoutConfigsInput = {
@@ -537,6 +568,7 @@ export type UtilityTypeUncheckedCreateWithoutConfigsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeCreateOrConnectWithoutConfigsInput = {
@@ -564,6 +596,7 @@ export type UtilityTypeUpdateWithoutConfigsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutUtilityTypesNestedInput
   meters?: Prisma.MeterUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeUncheckedUpdateWithoutConfigsInput = {
@@ -575,6 +608,7 @@ export type UtilityTypeUncheckedUpdateWithoutConfigsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUncheckedUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeCreateWithoutMetersInput = {
@@ -586,6 +620,7 @@ export type UtilityTypeCreateWithoutMetersInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutUtilityTypesInput
   configs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeUncheckedCreateWithoutMetersInput = {
@@ -597,6 +632,7 @@ export type UtilityTypeUncheckedCreateWithoutMetersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUtilityTypeInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedCreateNestedManyWithoutUtilityTypeInput
 }
 
 export type UtilityTypeCreateOrConnectWithoutMetersInput = {
@@ -624,6 +660,7 @@ export type UtilityTypeUpdateWithoutMetersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutUtilityTypesNestedInput
   configs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeUncheckedUpdateWithoutMetersInput = {
@@ -635,6 +672,71 @@ export type UtilityTypeUncheckedUpdateWithoutMetersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutUtilityTypeNestedInput
+}
+
+export type UtilityTypeCreateWithoutStatementItemsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutUtilityTypesInput
+  configs?: Prisma.PropertyUtilityConfigCreateNestedManyWithoutUtilityTypeInput
+  meters?: Prisma.MeterCreateNestedManyWithoutUtilityTypeInput
+}
+
+export type UtilityTypeUncheckedCreateWithoutStatementItemsInput = {
+  id?: string
+  userId?: string | null
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  configs?: Prisma.PropertyUtilityConfigUncheckedCreateNestedManyWithoutUtilityTypeInput
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutUtilityTypeInput
+}
+
+export type UtilityTypeCreateOrConnectWithoutStatementItemsInput = {
+  where: Prisma.UtilityTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.UtilityTypeCreateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedCreateWithoutStatementItemsInput>
+}
+
+export type UtilityTypeUpsertWithoutStatementItemsInput = {
+  update: Prisma.XOR<Prisma.UtilityTypeUpdateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedUpdateWithoutStatementItemsInput>
+  create: Prisma.XOR<Prisma.UtilityTypeCreateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedCreateWithoutStatementItemsInput>
+  where?: Prisma.UtilityTypeWhereInput
+}
+
+export type UtilityTypeUpdateToOneWithWhereWithoutStatementItemsInput = {
+  where?: Prisma.UtilityTypeWhereInput
+  data: Prisma.XOR<Prisma.UtilityTypeUpdateWithoutStatementItemsInput, Prisma.UtilityTypeUncheckedUpdateWithoutStatementItemsInput>
+}
+
+export type UtilityTypeUpdateWithoutStatementItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutUtilityTypesNestedInput
+  configs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUtilityTypeNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutUtilityTypeNestedInput
+}
+
+export type UtilityTypeUncheckedUpdateWithoutStatementItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  configs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUtilityTypeNestedInput
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeCreateManyUserInput = {
@@ -655,6 +757,7 @@ export type UtilityTypeUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   configs?: Prisma.PropertyUtilityConfigUpdateManyWithoutUtilityTypeNestedInput
   meters?: Prisma.MeterUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeUncheckedUpdateWithoutUserInput = {
@@ -666,6 +769,7 @@ export type UtilityTypeUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   configs?: Prisma.PropertyUtilityConfigUncheckedUpdateManyWithoutUtilityTypeNestedInput
   meters?: Prisma.MeterUncheckedUpdateManyWithoutUtilityTypeNestedInput
+  statementItems?: Prisma.MonthlyStatementItemUncheckedUpdateManyWithoutUtilityTypeNestedInput
 }
 
 export type UtilityTypeUncheckedUpdateManyWithoutUserInput = {
@@ -685,11 +789,13 @@ export type UtilityTypeUncheckedUpdateManyWithoutUserInput = {
 export type UtilityTypeCountOutputType = {
   configs: number
   meters: number
+  statementItems: number
 }
 
 export type UtilityTypeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   configs?: boolean | UtilityTypeCountOutputTypeCountConfigsArgs
   meters?: boolean | UtilityTypeCountOutputTypeCountMetersArgs
+  statementItems?: boolean | UtilityTypeCountOutputTypeCountStatementItemsArgs
 }
 
 /**
@@ -716,6 +822,13 @@ export type UtilityTypeCountOutputTypeCountMetersArgs<ExtArgs extends runtime.Ty
   where?: Prisma.MeterWhereInput
 }
 
+/**
+ * UtilityTypeCountOutputType without action
+ */
+export type UtilityTypeCountOutputTypeCountStatementItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MonthlyStatementItemWhereInput
+}
+
 
 export type UtilityTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -728,6 +841,7 @@ export type UtilityTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   user?: boolean | Prisma.UtilityType$userArgs<ExtArgs>
   configs?: boolean | Prisma.UtilityType$configsArgs<ExtArgs>
   meters?: boolean | Prisma.UtilityType$metersArgs<ExtArgs>
+  statementItems?: boolean | Prisma.UtilityType$statementItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UtilityTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["utilityType"]>
 
@@ -768,6 +882,7 @@ export type UtilityTypeInclude<ExtArgs extends runtime.Types.Extensions.Internal
   user?: boolean | Prisma.UtilityType$userArgs<ExtArgs>
   configs?: boolean | Prisma.UtilityType$configsArgs<ExtArgs>
   meters?: boolean | Prisma.UtilityType$metersArgs<ExtArgs>
+  statementItems?: boolean | Prisma.UtilityType$statementItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UtilityTypeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UtilityTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -783,6 +898,7 @@ export type $UtilityTypePayload<ExtArgs extends runtime.Types.Extensions.Interna
     user: Prisma.$UserPayload<ExtArgs> | null
     configs: Prisma.$PropertyUtilityConfigPayload<ExtArgs>[]
     meters: Prisma.$MeterPayload<ExtArgs>[]
+    statementItems: Prisma.$MonthlyStatementItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1189,6 +1305,7 @@ export interface Prisma__UtilityTypeClient<T, Null = never, ExtArgs extends runt
   user<T extends Prisma.UtilityType$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityType$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   configs<T extends Prisma.UtilityType$configsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityType$configsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyUtilityConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meters<T extends Prisma.UtilityType$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityType$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  statementItems<T extends Prisma.UtilityType$statementItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityType$statementItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MonthlyStatementItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1690,6 +1807,30 @@ export type UtilityType$metersArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
+}
+
+/**
+ * UtilityType.statementItems
+ */
+export type UtilityType$statementItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MonthlyStatementItem
+   */
+  select?: Prisma.MonthlyStatementItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MonthlyStatementItem
+   */
+  omit?: Prisma.MonthlyStatementItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MonthlyStatementItemInclude<ExtArgs> | null
+  where?: Prisma.MonthlyStatementItemWhereInput
+  orderBy?: Prisma.MonthlyStatementItemOrderByWithRelationInput | Prisma.MonthlyStatementItemOrderByWithRelationInput[]
+  cursor?: Prisma.MonthlyStatementItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MonthlyStatementItemScalarFieldEnum | Prisma.MonthlyStatementItemScalarFieldEnum[]
 }
 
 /**

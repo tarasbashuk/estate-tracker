@@ -1,0 +1,14 @@
+'use client';
+
+import { Alert, Button, Stack } from '@mui/material';
+
+export default function StatementDetailsError({ reset }: { reset: () => void }) {
+  return (
+    <Stack spacing={2}>
+      <Alert severity="error">Unable to load this monthly statement.</Alert>
+      <Button variant="outlined" onClick={reset} sx={{ alignSelf: 'flex-start' }}>
+        Try again
+      </Button>
+    </Stack>
+  );
+}

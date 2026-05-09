@@ -307,6 +307,7 @@ export type RentalAgreementWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  monthlyStatements?: Prisma.MonthlyStatementListRelationFilter
 }
 
 export type RentalAgreementOrderByWithRelationInput = {
@@ -328,6 +329,7 @@ export type RentalAgreementOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   property?: Prisma.PropertyOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  monthlyStatements?: Prisma.MonthlyStatementOrderByRelationAggregateInput
 }
 
 export type RentalAgreementWhereUniqueInput = Prisma.AtLeast<{
@@ -352,6 +354,7 @@ export type RentalAgreementWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  monthlyStatements?: Prisma.MonthlyStatementListRelationFilter
 }, "id">
 
 export type RentalAgreementOrderByWithAggregationInput = {
@@ -414,6 +417,7 @@ export type RentalAgreementCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutAgreementsInput
   property: Prisma.PropertyCreateNestedOneWithoutAgreementsInput
   tenant: Prisma.TenantCreateNestedOneWithoutAgreementsInput
+  monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementUncheckedCreateInput = {
@@ -432,6 +436,7 @@ export type RentalAgreementUncheckedCreateInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementUpdateInput = {
@@ -450,6 +455,7 @@ export type RentalAgreementUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutAgreementsNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutAgreementsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutAgreementsNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateInput = {
@@ -468,6 +474,7 @@ export type RentalAgreementUncheckedUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementCreateManyInput = {
@@ -595,6 +602,11 @@ export type RentalAgreementSumOrderByAggregateInput = {
   monthlyRentAmount?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+}
+
+export type RentalAgreementScalarRelationFilter = {
+  is?: Prisma.RentalAgreementWhereInput
+  isNot?: Prisma.RentalAgreementWhereInput
 }
 
 export type RentalAgreementCreateNestedManyWithoutUserInput = {
@@ -751,6 +763,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type RentalAgreementCreateNestedOneWithoutMonthlyStatementsInput = {
+  create?: Prisma.XOR<Prisma.RentalAgreementCreateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedCreateWithoutMonthlyStatementsInput>
+  connectOrCreate?: Prisma.RentalAgreementCreateOrConnectWithoutMonthlyStatementsInput
+  connect?: Prisma.RentalAgreementWhereUniqueInput
+}
+
+export type RentalAgreementUpdateOneRequiredWithoutMonthlyStatementsNestedInput = {
+  create?: Prisma.XOR<Prisma.RentalAgreementCreateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedCreateWithoutMonthlyStatementsInput>
+  connectOrCreate?: Prisma.RentalAgreementCreateOrConnectWithoutMonthlyStatementsInput
+  upsert?: Prisma.RentalAgreementUpsertWithoutMonthlyStatementsInput
+  connect?: Prisma.RentalAgreementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RentalAgreementUpdateToOneWithWhereWithoutMonthlyStatementsInput, Prisma.RentalAgreementUpdateWithoutMonthlyStatementsInput>, Prisma.RentalAgreementUncheckedUpdateWithoutMonthlyStatementsInput>
+}
+
 export type RentalAgreementCreateWithoutUserInput = {
   id?: string
   startDate: Date | string
@@ -766,6 +792,7 @@ export type RentalAgreementCreateWithoutUserInput = {
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutAgreementsInput
   tenant: Prisma.TenantCreateNestedOneWithoutAgreementsInput
+  monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementUncheckedCreateWithoutUserInput = {
@@ -783,6 +810,7 @@ export type RentalAgreementUncheckedCreateWithoutUserInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementCreateOrConnectWithoutUserInput = {
@@ -847,6 +875,7 @@ export type RentalAgreementCreateWithoutPropertyInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgreementsInput
   tenant: Prisma.TenantCreateNestedOneWithoutAgreementsInput
+  monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementUncheckedCreateWithoutPropertyInput = {
@@ -864,6 +893,7 @@ export type RentalAgreementUncheckedCreateWithoutPropertyInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementCreateOrConnectWithoutPropertyInput = {
@@ -907,6 +937,7 @@ export type RentalAgreementCreateWithoutTenantInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAgreementsInput
   property: Prisma.PropertyCreateNestedOneWithoutAgreementsInput
+  monthlyStatements?: Prisma.MonthlyStatementCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementUncheckedCreateWithoutTenantInput = {
@@ -924,6 +955,7 @@ export type RentalAgreementUncheckedCreateWithoutTenantInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedCreateNestedManyWithoutRentalAgreementInput
 }
 
 export type RentalAgreementCreateOrConnectWithoutTenantInput = {
@@ -950,6 +982,94 @@ export type RentalAgreementUpdateWithWhereUniqueWithoutTenantInput = {
 export type RentalAgreementUpdateManyWithWhereWithoutTenantInput = {
   where: Prisma.RentalAgreementScalarWhereInput
   data: Prisma.XOR<Prisma.RentalAgreementUpdateManyMutationInput, Prisma.RentalAgreementUncheckedUpdateManyWithoutTenantInput>
+}
+
+export type RentalAgreementCreateWithoutMonthlyStatementsInput = {
+  id?: string
+  startDate: Date | string
+  endDate?: Date | string | null
+  status?: $Enums.AgreementStatus
+  monthlyRentAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  monthlyRentCurrency?: $Enums.Currency
+  paymentDueDay: number
+  depositAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  depositCurrency?: $Enums.Currency
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutAgreementsInput
+  property: Prisma.PropertyCreateNestedOneWithoutAgreementsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutAgreementsInput
+}
+
+export type RentalAgreementUncheckedCreateWithoutMonthlyStatementsInput = {
+  id?: string
+  userId: string
+  propertyId: string
+  tenantId: string
+  startDate: Date | string
+  endDate?: Date | string | null
+  status?: $Enums.AgreementStatus
+  monthlyRentAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  monthlyRentCurrency?: $Enums.Currency
+  paymentDueDay: number
+  depositAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  depositCurrency?: $Enums.Currency
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RentalAgreementCreateOrConnectWithoutMonthlyStatementsInput = {
+  where: Prisma.RentalAgreementWhereUniqueInput
+  create: Prisma.XOR<Prisma.RentalAgreementCreateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedCreateWithoutMonthlyStatementsInput>
+}
+
+export type RentalAgreementUpsertWithoutMonthlyStatementsInput = {
+  update: Prisma.XOR<Prisma.RentalAgreementUpdateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedUpdateWithoutMonthlyStatementsInput>
+  create: Prisma.XOR<Prisma.RentalAgreementCreateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedCreateWithoutMonthlyStatementsInput>
+  where?: Prisma.RentalAgreementWhereInput
+}
+
+export type RentalAgreementUpdateToOneWithWhereWithoutMonthlyStatementsInput = {
+  where?: Prisma.RentalAgreementWhereInput
+  data: Prisma.XOR<Prisma.RentalAgreementUpdateWithoutMonthlyStatementsInput, Prisma.RentalAgreementUncheckedUpdateWithoutMonthlyStatementsInput>
+}
+
+export type RentalAgreementUpdateWithoutMonthlyStatementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+  monthlyRentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  monthlyRentCurrency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  depositAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  depositCurrency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutAgreementsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutAgreementsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutAgreementsNestedInput
+}
+
+export type RentalAgreementUncheckedUpdateWithoutMonthlyStatementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+  monthlyRentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  monthlyRentCurrency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  depositAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  depositCurrency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RentalAgreementCreateManyUserInput = {
@@ -984,6 +1104,7 @@ export type RentalAgreementUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutAgreementsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutAgreementsNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateWithoutUserInput = {
@@ -1001,6 +1122,7 @@ export type RentalAgreementUncheckedUpdateWithoutUserInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateManyWithoutUserInput = {
@@ -1052,6 +1174,7 @@ export type RentalAgreementUpdateWithoutPropertyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgreementsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutAgreementsNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateWithoutPropertyInput = {
@@ -1069,6 +1192,7 @@ export type RentalAgreementUncheckedUpdateWithoutPropertyInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateManyWithoutPropertyInput = {
@@ -1120,6 +1244,7 @@ export type RentalAgreementUpdateWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAgreementsNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutAgreementsNestedInput
+  monthlyStatements?: Prisma.MonthlyStatementUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateWithoutTenantInput = {
@@ -1137,6 +1262,7 @@ export type RentalAgreementUncheckedUpdateWithoutTenantInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyStatements?: Prisma.MonthlyStatementUncheckedUpdateManyWithoutRentalAgreementNestedInput
 }
 
 export type RentalAgreementUncheckedUpdateManyWithoutTenantInput = {
@@ -1156,6 +1282,35 @@ export type RentalAgreementUncheckedUpdateManyWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type RentalAgreementCountOutputType
+ */
+
+export type RentalAgreementCountOutputType = {
+  monthlyStatements: number
+}
+
+export type RentalAgreementCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  monthlyStatements?: boolean | RentalAgreementCountOutputTypeCountMonthlyStatementsArgs
+}
+
+/**
+ * RentalAgreementCountOutputType without action
+ */
+export type RentalAgreementCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalAgreementCountOutputType
+   */
+  select?: Prisma.RentalAgreementCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RentalAgreementCountOutputType without action
+ */
+export type RentalAgreementCountOutputTypeCountMonthlyStatementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MonthlyStatementWhereInput
+}
 
 
 export type RentalAgreementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1177,6 +1332,8 @@ export type RentalAgreementSelect<ExtArgs extends runtime.Types.Extensions.Inter
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  monthlyStatements?: boolean | Prisma.RentalAgreement$monthlyStatementsArgs<ExtArgs>
+  _count?: boolean | Prisma.RentalAgreementCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rentalAgreement"]>
 
 export type RentalAgreementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1244,6 +1401,8 @@ export type RentalAgreementInclude<ExtArgs extends runtime.Types.Extensions.Inte
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  monthlyStatements?: boolean | Prisma.RentalAgreement$monthlyStatementsArgs<ExtArgs>
+  _count?: boolean | Prisma.RentalAgreementCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RentalAgreementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1262,6 +1421,7 @@ export type $RentalAgreementPayload<ExtArgs extends runtime.Types.Extensions.Int
     user: Prisma.$UserPayload<ExtArgs>
     property: Prisma.$PropertyPayload<ExtArgs>
     tenant: Prisma.$TenantPayload<ExtArgs>
+    monthlyStatements: Prisma.$MonthlyStatementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1676,6 +1836,7 @@ export interface Prisma__RentalAgreementClient<T, Null = never, ExtArgs extends 
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  monthlyStatements<T extends Prisma.RentalAgreement$monthlyStatementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RentalAgreement$monthlyStatementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MonthlyStatementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2118,6 +2279,30 @@ export type RentalAgreementDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many RentalAgreements to delete.
    */
   limit?: number
+}
+
+/**
+ * RentalAgreement.monthlyStatements
+ */
+export type RentalAgreement$monthlyStatementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MonthlyStatement
+   */
+  select?: Prisma.MonthlyStatementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MonthlyStatement
+   */
+  omit?: Prisma.MonthlyStatementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MonthlyStatementInclude<ExtArgs> | null
+  where?: Prisma.MonthlyStatementWhereInput
+  orderBy?: Prisma.MonthlyStatementOrderByWithRelationInput | Prisma.MonthlyStatementOrderByWithRelationInput[]
+  cursor?: Prisma.MonthlyStatementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MonthlyStatementScalarFieldEnum | Prisma.MonthlyStatementScalarFieldEnum[]
 }
 
 /**

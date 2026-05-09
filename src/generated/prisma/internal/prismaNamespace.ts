@@ -391,7 +391,9 @@ export const ModelName = {
   UtilityType: 'UtilityType',
   PropertyUtilityConfig: 'PropertyUtilityConfig',
   Meter: 'Meter',
-  MeterReading: 'MeterReading'
+  MeterReading: 'MeterReading',
+  MonthlyStatement: 'MonthlyStatement',
+  MonthlyStatementItem: 'MonthlyStatementItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "property" | "tenant" | "rentalAgreement" | "utilityType" | "propertyUtilityConfig" | "meter" | "meterReading"
+    modelProps: "user" | "property" | "tenant" | "rentalAgreement" | "utilityType" | "propertyUtilityConfig" | "meter" | "meterReading" | "monthlyStatement" | "monthlyStatementItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1003,6 +1005,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MonthlyStatement: {
+      payload: Prisma.$MonthlyStatementPayload<ExtArgs>
+      fields: Prisma.MonthlyStatementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MonthlyStatementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MonthlyStatementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        findFirst: {
+          args: Prisma.MonthlyStatementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MonthlyStatementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        findMany: {
+          args: Prisma.MonthlyStatementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>[]
+        }
+        create: {
+          args: Prisma.MonthlyStatementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        createMany: {
+          args: Prisma.MonthlyStatementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MonthlyStatementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>[]
+        }
+        delete: {
+          args: Prisma.MonthlyStatementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        update: {
+          args: Prisma.MonthlyStatementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        deleteMany: {
+          args: Prisma.MonthlyStatementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MonthlyStatementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MonthlyStatementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>[]
+        }
+        upsert: {
+          args: Prisma.MonthlyStatementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementPayload>
+        }
+        aggregate: {
+          args: Prisma.MonthlyStatementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMonthlyStatement>
+        }
+        groupBy: {
+          args: Prisma.MonthlyStatementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonthlyStatementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MonthlyStatementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonthlyStatementCountAggregateOutputType> | number
+        }
+      }
+    }
+    MonthlyStatementItem: {
+      payload: Prisma.$MonthlyStatementItemPayload<ExtArgs>
+      fields: Prisma.MonthlyStatementItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MonthlyStatementItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MonthlyStatementItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        findFirst: {
+          args: Prisma.MonthlyStatementItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MonthlyStatementItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        findMany: {
+          args: Prisma.MonthlyStatementItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>[]
+        }
+        create: {
+          args: Prisma.MonthlyStatementItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        createMany: {
+          args: Prisma.MonthlyStatementItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MonthlyStatementItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>[]
+        }
+        delete: {
+          args: Prisma.MonthlyStatementItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        update: {
+          args: Prisma.MonthlyStatementItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.MonthlyStatementItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MonthlyStatementItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MonthlyStatementItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.MonthlyStatementItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonthlyStatementItemPayload>
+        }
+        aggregate: {
+          args: Prisma.MonthlyStatementItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMonthlyStatementItem>
+        }
+        groupBy: {
+          args: Prisma.MonthlyStatementItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonthlyStatementItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MonthlyStatementItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonthlyStatementItemCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1187,6 +1337,42 @@ export const MeterReadingScalarFieldEnum = {
 export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
 
 
+export const MonthlyStatementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  rentalAgreementId: 'rentalAgreementId',
+  tenantId: 'tenantId',
+  periodMonth: 'periodMonth',
+  periodYear: 'periodYear',
+  dueDate: 'dueDate',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonthlyStatementScalarFieldEnum = (typeof MonthlyStatementScalarFieldEnum)[keyof typeof MonthlyStatementScalarFieldEnum]
+
+
+export const MonthlyStatementItemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monthlyStatementId: 'monthlyStatementId',
+  utilityTypeId: 'utilityTypeId',
+  itemType: 'itemType',
+  label: 'label',
+  amount: 'amount',
+  currency: 'currency',
+  sortOrder: 'sortOrder',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonthlyStatementItemScalarFieldEnum = (typeof MonthlyStatementItemScalarFieldEnum)[keyof typeof MonthlyStatementItemScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1365,6 +1551,34 @@ export type ListEnumMeterReadingStatusFieldRefInput<$PrismaModel> = FieldRefInpu
 
 
 /**
+ * Reference to a field of type 'StatementStatus'
+ */
+export type EnumStatementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatementStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'StatementStatus[]'
+ */
+export type ListEnumStatementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatementStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StatementItemType'
+ */
+export type EnumStatementItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatementItemType'>
+    
+
+
+/**
+ * Reference to a field of type 'StatementItemType[]'
+ */
+export type ListEnumStatementItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatementItemType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1495,6 +1709,8 @@ export type GlobalOmitConfig = {
   propertyUtilityConfig?: Prisma.PropertyUtilityConfigOmit
   meter?: Prisma.MeterOmit
   meterReading?: Prisma.MeterReadingOmit
+  monthlyStatement?: Prisma.MonthlyStatementOmit
+  monthlyStatementItem?: Prisma.MonthlyStatementItemOmit
 }
 
 /* Types for Logging */

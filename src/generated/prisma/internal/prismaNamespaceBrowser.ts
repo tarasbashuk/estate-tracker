@@ -58,7 +58,9 @@ export const ModelName = {
   UtilityType: 'UtilityType',
   PropertyUtilityConfig: 'PropertyUtilityConfig',
   Meter: 'Meter',
-  MeterReading: 'MeterReading'
+  MeterReading: 'MeterReading',
+  MonthlyStatement: 'MonthlyStatement',
+  MonthlyStatementItem: 'MonthlyStatementItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -220,6 +222,42 @@ export const MeterReadingScalarFieldEnum = {
 } as const
 
 export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
+
+
+export const MonthlyStatementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  propertyId: 'propertyId',
+  rentalAgreementId: 'rentalAgreementId',
+  tenantId: 'tenantId',
+  periodMonth: 'periodMonth',
+  periodYear: 'periodYear',
+  dueDate: 'dueDate',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonthlyStatementScalarFieldEnum = (typeof MonthlyStatementScalarFieldEnum)[keyof typeof MonthlyStatementScalarFieldEnum]
+
+
+export const MonthlyStatementItemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monthlyStatementId: 'monthlyStatementId',
+  utilityTypeId: 'utilityTypeId',
+  itemType: 'itemType',
+  label: 'label',
+  amount: 'amount',
+  currency: 'currency',
+  sortOrder: 'sortOrder',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonthlyStatementItemScalarFieldEnum = (typeof MonthlyStatementItemScalarFieldEnum)[keyof typeof MonthlyStatementItemScalarFieldEnum]
 
 
 export const SortOrder = {

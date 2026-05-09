@@ -12,12 +12,14 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupsIcon from '@mui/icons-material/Groups';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: <DashboardIcon /> },
   { label: 'Properties', href: '/properties', icon: <ApartmentIcon /> },
   { label: 'Tenants', href: '/tenants', icon: <GroupsIcon /> },
   { label: 'Agreements', href: '/agreements', icon: <AssignmentIcon /> },
+  { label: 'Statements', href: '/statements', icon: <ReceiptLongIcon /> },
 ];
 
 export function DashboardNav() {
