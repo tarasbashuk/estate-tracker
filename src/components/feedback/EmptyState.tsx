@@ -1,4 +1,8 @@
+'use client';
+
 import { Box, Typography } from '@mui/material';
+
+import { useT } from '@/components/layout/LocaleProvider';
 
 export function EmptyState({
   title,
@@ -7,6 +11,8 @@ export function EmptyState({
   title: string;
   description: string;
 }) {
+  const t = useT();
+
   return (
     <Box
       sx={{
@@ -20,10 +26,9 @@ export function EmptyState({
       }}
     >
       <Typography variant="h6" gutterBottom>
-        {title}
+        {t(title)}
       </Typography>
-      <Typography color="text.secondary">{description}</Typography>
+      <Typography color="text.secondary">{t(description)}</Typography>
     </Box>
   );
 }
-
