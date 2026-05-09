@@ -37,6 +37,9 @@ type PropertyFormProps = {
   title?: string;
   description?: string;
   onSubmitAction?: (values: PropertyFormValues) => Promise<PropertyActionState>;
+  onSuccess?: () => void;
+  showHeader?: boolean;
+  paper?: boolean;
 };
 
 const defaultPropertyValues: PropertyFormValues = {
@@ -57,6 +60,9 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
     title = 'Add property',
     description = 'Add the basic property details. Tenant and agreement setup comes later.',
     onSubmitAction = createPropertyAction,
+    onSuccess,
+    showHeader = true,
+    paper = true,
   } = props;
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -85,6 +91,7 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
       }
 
       reset({ ...defaultPropertyValues, ...defaultValues });
+      onSuccess?.();
       router.refresh();
     });
   });
@@ -93,14 +100,9 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
     router.prefetch('/properties');
   }, [router]);
 
-  return (
-    <Paper
-      component="form"
-      onSubmit={onSubmit}
-      elevation={0}
-      sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}
-    >
-      <Stack spacing={3}>
+  const content = (
+    <Stack spacing={3}>
+      {showHeader ? (
         <Stack spacing={0.5}>
           <Typography variant="h6" component="h2">
             {title}
@@ -109,156 +111,175 @@ export function CreatePropertyForm(props: PropertyFormProps = {}) {
             {description}
           </Typography>
         </Stack>
+      ) : null}
 
-        {errors.root?.message && (
-          <Alert severity="error">{errors.root.message}</Alert>
-        )}
+      {errors.root?.message && (
+        <Alert severity="error">{errors.root.message}</Alert>
+      )}
 
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 2,
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-          }}
-        >
-          <Box>
-            <TextField
-              label="Property name"
-              fullWidth
-              required
-              disabled={isPending}
-              error={Boolean(errors.name)}
-              helperText={errors.name?.message}
-              {...register('name')}
-            />
-          </Box>
-          <Box>
-            <Controller
-              name="propertyType"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Property type"
-                  select
-                  fullWidth
-                  disabled={isPending}
-                  error={Boolean(errors.propertyType)}
-                  helperText={errors.propertyType?.message}
-                  {...field}
-                  value={field.value ?? 'APARTMENT'}
-                >
-                  {propertyTypeValues.map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {propertyTypeLabels[value]}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
-            />
-          </Box>
-          <Box sx={{ gridColumn: '1 / -1' }}>
-            <TextField
-              label="Address line 1"
-              fullWidth
-              required
-              disabled={isPending}
-              error={Boolean(errors.addressLine1)}
-              helperText={errors.addressLine1?.message}
-              {...register('addressLine1')}
-            />
-          </Box>
-          <Box sx={{ gridColumn: '1 / -1' }}>
-            <TextField
-              label="Address line 2"
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.addressLine2)}
-              helperText={errors.addressLine2?.message}
-              {...register('addressLine2')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="City"
-              fullWidth
-              required
-              disabled={isPending}
-              error={Boolean(errors.city)}
-              helperText={errors.city?.message}
-              {...register('city')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Country"
-              fullWidth
-              required
-              disabled={isPending}
-              error={Boolean(errors.country)}
-              helperText={errors.country?.message}
-              {...register('country')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Postal code"
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.postalCode)}
-              helperText={errors.postalCode?.message}
-              {...register('postalCode')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Area"
-              type="number"
-              fullWidth
-              disabled={isPending}
-              slotProps={{ htmlInput: { min: 0, step: '0.01' } }}
-              error={Boolean(errors.area)}
-              helperText={errors.area?.message}
-              {...register('area', {
-                setValueAs: (value) =>
-                  value === '' || value === null ? undefined : Number(value),
-              })}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Rooms"
-              type="number"
-              fullWidth
-              disabled={isPending}
-              slotProps={{ htmlInput: { min: 1, step: 1 } }}
-              error={Boolean(errors.rooms)}
-              helperText={errors.rooms?.message}
-              {...register('rooms', {
-                setValueAs: (value) =>
-                  value === '' || value === null ? undefined : Number(value),
-              })}
-            />
-          </Box>
-          <Box sx={{ gridColumn: '1 / -1' }}>
-            <TextField
-              label="Notes"
-              fullWidth
-              multiline
-              minRows={3}
-              disabled={isPending}
-              error={Boolean(errors.notes)}
-              helperText={errors.notes?.message}
-              {...register('notes')}
-            />
-          </Box>
+      <Box
+        sx={{
+          display: 'grid',
+          gap: 2,
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+        }}
+      >
+        <Box>
+          <TextField
+            label="Property name"
+            fullWidth
+            required
+            disabled={isPending}
+            error={Boolean(errors.name)}
+            helperText={errors.name?.message}
+            {...register('name')}
+          />
         </Box>
+        <Box>
+          <Controller
+            name="propertyType"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label="Property type"
+                select
+                fullWidth
+                disabled={isPending}
+                error={Boolean(errors.propertyType)}
+                helperText={errors.propertyType?.message}
+                {...field}
+                value={field.value ?? 'APARTMENT'}
+              >
+                {propertyTypeValues.map((value) => (
+                  <MenuItem key={value} value={value}>
+                    {propertyTypeLabels[value]}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
+        </Box>
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <TextField
+            label="Address line 1"
+            fullWidth
+            required
+            disabled={isPending}
+            error={Boolean(errors.addressLine1)}
+            helperText={errors.addressLine1?.message}
+            {...register('addressLine1')}
+          />
+        </Box>
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <TextField
+            label="Address line 2"
+            fullWidth
+            disabled={isPending}
+            error={Boolean(errors.addressLine2)}
+            helperText={errors.addressLine2?.message}
+            {...register('addressLine2')}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="City"
+            fullWidth
+            required
+            disabled={isPending}
+            error={Boolean(errors.city)}
+            helperText={errors.city?.message}
+            {...register('city')}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="Country"
+            fullWidth
+            required
+            disabled={isPending}
+            error={Boolean(errors.country)}
+            helperText={errors.country?.message}
+            {...register('country')}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="Postal code"
+            fullWidth
+            disabled={isPending}
+            error={Boolean(errors.postalCode)}
+            helperText={errors.postalCode?.message}
+            {...register('postalCode')}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="Area"
+            type="number"
+            fullWidth
+            disabled={isPending}
+            slotProps={{ htmlInput: { min: 0, step: '0.01' } }}
+            error={Boolean(errors.area)}
+            helperText={errors.area?.message}
+            {...register('area', {
+              setValueAs: (value) =>
+                value === '' || value === null ? undefined : Number(value),
+            })}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="Rooms"
+            type="number"
+            fullWidth
+            disabled={isPending}
+            slotProps={{ htmlInput: { min: 1, step: 1 } }}
+            error={Boolean(errors.rooms)}
+            helperText={errors.rooms?.message}
+            {...register('rooms', {
+              setValueAs: (value) =>
+                value === '' || value === null ? undefined : Number(value),
+            })}
+          />
+        </Box>
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <TextField
+            label="Notes"
+            fullWidth
+            multiline
+            minRows={3}
+            disabled={isPending}
+            error={Boolean(errors.notes)}
+            helperText={errors.notes?.message}
+            {...register('notes')}
+          />
+        </Box>
+      </Box>
 
-        <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
-          <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending ? 'Saving...' : submitLabel}
-          </Button>
-        </Stack>
+      <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
+        <Button type="submit" variant="contained" disabled={isPending}>
+          {isPending ? 'Saving...' : submitLabel}
+        </Button>
       </Stack>
+    </Stack>
+  );
+
+  if (!paper) {
+    return (
+      <Box component="form" onSubmit={onSubmit}>
+        {content}
+      </Box>
+    );
+  }
+
+  return (
+    <Paper
+      component="form"
+      onSubmit={onSubmit}
+      elevation={0}
+      sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}
+    >
+      {content}
     </Paper>
   );
 }

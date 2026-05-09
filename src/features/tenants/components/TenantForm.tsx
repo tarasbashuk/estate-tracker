@@ -41,6 +41,9 @@ type TenantFormProps = {
   title?: string;
   description?: string;
   onSubmitAction?: (values: TenantFormValues) => Promise<TenantActionState>;
+  onSuccess?: () => void;
+  showHeader?: boolean;
+  paper?: boolean;
 };
 
 const defaultTenantValues: TenantFormValues = {
@@ -59,6 +62,9 @@ export function TenantForm(props: TenantFormProps = {}) {
     title = 'Add tenant',
     description = 'Add contact details for a tenant. Agreements come later.',
     onSubmitAction = createTenantAction,
+    onSuccess,
+    showHeader = true,
+    paper = true,
   } = props;
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -87,6 +93,7 @@ export function TenantForm(props: TenantFormProps = {}) {
       }
 
       reset({ ...defaultTenantValues, ...defaultValues });
+      onSuccess?.();
       router.refresh();
     });
   });
@@ -95,14 +102,9 @@ export function TenantForm(props: TenantFormProps = {}) {
     router.prefetch('/tenants');
   }, [router]);
 
-  return (
-    <Paper
-      component="form"
-      onSubmit={onSubmit}
-      elevation={0}
-      sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}
-    >
-      <Stack spacing={3}>
+  const content = (
+    <Stack spacing={3}>
+      {showHeader ? (
         <Stack spacing={0.5}>
           <Typography variant="h6" component="h2">
             {title}
@@ -111,104 +113,123 @@ export function TenantForm(props: TenantFormProps = {}) {
             {description}
           </Typography>
         </Stack>
+      ) : null}
 
-        {errors.root?.message && (
-          <Alert severity="error">{errors.root.message}</Alert>
-        )}
+      {errors.root?.message && (
+        <Alert severity="error">{errors.root.message}</Alert>
+      )}
 
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 2,
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-          }}
-        >
-          <Box>
-            <TextField
-              label="Full name"
-              fullWidth
-              required
-              disabled={isPending}
-              error={Boolean(errors.fullName)}
-              helperText={errors.fullName?.message}
-              {...register('fullName')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Email"
-              type="email"
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.email)}
-              helperText={errors.email?.message}
-              {...register('email')}
-            />
-          </Box>
-          <Box>
-            <TextField
-              label="Phone"
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.phone)}
-              helperText={errors.phone?.message}
-              {...register('phone')}
-            />
-          </Box>
-          <Box>
-            <Controller
-              name="messengerType"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Messenger"
-                  select
-                  fullWidth
-                  disabled={isPending}
-                  error={Boolean(errors.messengerType)}
-                  helperText={errors.messengerType?.message}
-                  {...field}
-                  value={field.value ?? 'OTHER'}
-                >
-                  {messengerTypeValues.map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {messengerTypeLabels[value]}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
-            />
-          </Box>
-          <Box sx={{ gridColumn: '1 / -1' }}>
-            <TextField
-              label="Messenger handle"
-              fullWidth
-              disabled={isPending}
-              error={Boolean(errors.messengerHandle)}
-              helperText={errors.messengerHandle?.message}
-              {...register('messengerHandle')}
-            />
-          </Box>
-          <Box sx={{ gridColumn: '1 / -1' }}>
-            <TextField
-              label="Notes"
-              fullWidth
-              multiline
-              minRows={3}
-              disabled={isPending}
-              error={Boolean(errors.notes)}
-              helperText={errors.notes?.message}
-              {...register('notes')}
-            />
-          </Box>
+      <Box
+        sx={{
+          display: 'grid',
+          gap: 2,
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+        }}
+      >
+        <Box>
+          <TextField
+            label="Full name"
+            fullWidth
+            required
+            disabled={isPending}
+            error={Boolean(errors.fullName)}
+            helperText={errors.fullName?.message}
+            {...register('fullName')}
+          />
         </Box>
+        <Box>
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            disabled={isPending}
+            error={Boolean(errors.email)}
+            helperText={errors.email?.message}
+            {...register('email')}
+          />
+        </Box>
+        <Box>
+          <TextField
+            label="Phone"
+            fullWidth
+            disabled={isPending}
+            error={Boolean(errors.phone)}
+            helperText={errors.phone?.message}
+            {...register('phone')}
+          />
+        </Box>
+        <Box>
+          <Controller
+            name="messengerType"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label="Messenger"
+                select
+                fullWidth
+                disabled={isPending}
+                error={Boolean(errors.messengerType)}
+                helperText={errors.messengerType?.message}
+                {...field}
+                value={field.value ?? 'OTHER'}
+              >
+                {messengerTypeValues.map((value) => (
+                  <MenuItem key={value} value={value}>
+                    {messengerTypeLabels[value]}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
+        </Box>
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <TextField
+            label="Messenger handle"
+            fullWidth
+            disabled={isPending}
+            error={Boolean(errors.messengerHandle)}
+            helperText={errors.messengerHandle?.message}
+            {...register('messengerHandle')}
+          />
+        </Box>
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <TextField
+            label="Notes"
+            fullWidth
+            multiline
+            minRows={3}
+            disabled={isPending}
+            error={Boolean(errors.notes)}
+            helperText={errors.notes?.message}
+            {...register('notes')}
+          />
+        </Box>
+      </Box>
 
-        <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
-          <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending ? 'Saving...' : submitLabel}
-          </Button>
-        </Stack>
+      <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
+        <Button type="submit" variant="contained" disabled={isPending}>
+          {isPending ? 'Saving...' : submitLabel}
+        </Button>
       </Stack>
+    </Stack>
+  );
+
+  if (!paper) {
+    return (
+      <Box component="form" onSubmit={onSubmit}>
+        {content}
+      </Box>
+    );
+  }
+
+  return (
+    <Paper
+      component="form"
+      onSubmit={onSubmit}
+      elevation={0}
+      sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}
+    >
+      {content}
     </Paper>
   );
 }
