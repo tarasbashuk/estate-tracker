@@ -15,17 +15,20 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
-const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: <DashboardIcon /> },
-  { label: 'Properties', href: '/properties', icon: <ApartmentIcon /> },
-  { label: 'Tenants', href: '/tenants', icon: <GroupsIcon /> },
-  { label: 'Agreements', href: '/agreements', icon: <AssignmentIcon /> },
-  { label: 'Statements', href: '/statements', icon: <ReceiptLongIcon /> },
-  { label: 'Reminders', href: '/reminders', icon: <TaskAltIcon /> },
-];
+import { dictionary, type Locale } from '@/lib/i18n';
 
-export function DashboardNav() {
+const navItems = [
+  { labelKey: 'dashboard', href: '/dashboard', icon: <DashboardIcon /> },
+  { labelKey: 'properties', href: '/properties', icon: <ApartmentIcon /> },
+  { labelKey: 'tenants', href: '/tenants', icon: <GroupsIcon /> },
+  { labelKey: 'agreements', href: '/agreements', icon: <AssignmentIcon /> },
+  { labelKey: 'statements', href: '/statements', icon: <ReceiptLongIcon /> },
+  { labelKey: 'reminders', href: '/reminders', icon: <TaskAltIcon /> },
+] as const;
+
+export function DashboardNav({ locale }: { locale: Locale }) {
   const pathname = usePathname();
+  const labels = dictionary[locale].nav;
 
   return (
     <List sx={{ px: 1 }}>
@@ -53,7 +56,7 @@ export function DashboardNav() {
               }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
+              <ListItemText primary={labels[item.labelKey]} />
             </ListItemButton>
           </Link>
         );

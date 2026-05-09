@@ -9,10 +9,18 @@ import {
 } from '@mui/material';
 
 import { DashboardNav } from './DashboardNav';
+import { LanguageToggle } from './LanguageToggle';
+import { getLocale } from '@/lib/i18n-server';
 
 const drawerWidth = 260;
 
-export function DashboardShell({ children }: { children: React.ReactNode }) {
+export async function DashboardShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const locale = await getLocale();
+
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <Drawer
@@ -34,7 +42,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           </Typography>
         </Toolbar>
         <Divider />
-        <DashboardNav />
+        <DashboardNav locale={locale} />
       </Drawer>
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -62,6 +70,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 Estate Tracker
               </Typography>
               <Box sx={{ flexGrow: { xs: 0, md: 1 } }} />
+              <LanguageToggle locale={locale} />
               <UserButton showName />
             </Stack>
           </Toolbar>

@@ -18,11 +18,15 @@ import {
 } from '@/features/statements/service';
 import { listRentalAgreements } from '@/features/agreements/service';
 import { listProperties } from '@/features/properties/service';
+import { dictionary } from '@/lib/i18n';
+import { getLocale } from '@/lib/i18n-server';
 import { requireUser } from '@/server/requireUser';
 
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
+  const locale = await getLocale();
+  const labels = dictionary[locale].dashboard;
   const user = await requireUser();
   const [properties, agreements, statements, reminders] = await Promise.all([
     listProperties(user.id),
@@ -49,10 +53,10 @@ export default async function DashboardPage() {
     <Stack spacing={3}>
       <Stack spacing={0.5}>
         <Typography variant="h4" component="h1">
-          Dashboard
+          {labels.title}
         </Typography>
         <Typography color="text.secondary">
-          Snapshot of properties, income, and open operational tasks.
+          {labels.subtitle}
         </Typography>
       </Stack>
 
@@ -61,11 +65,23 @@ export default async function DashboardPage() {
         spacing={2}
         sx={{ alignItems: 'stretch' }}
       >
-        <MetricCard label="Active properties" value={properties.length} />
-        <MetricCard label="Active agreements" value={activeAgreements.length} />
-        <MetricCard label="Expected income" value={`${expected.toFixed(2)} UAH`} />
-        <MetricCard label="Received income" value={`${received.toFixed(2)} UAH`} />
-        <MetricCard label="Overdue reminders" value={overdueReminders.length} />
+        <MetricCard label={labels.activeProperties} value={properties.length} />
+        <MetricCard
+          label={labels.activeAgreements}
+          value={activeAgreements.length}
+        />
+        <MetricCard
+          label={labels.expectedIncome}
+          value={`${expected.toFixed(2)} UAH`}
+        />
+        <MetricCard
+          label={labels.receivedIncome}
+          value={`${received.toFixed(2)} UAH`}
+        />
+        <MetricCard
+          label={labels.overdueReminders}
+          value={overdueReminders.length}
+        />
       </Stack>
 
       <Stack
@@ -75,21 +91,21 @@ export default async function DashboardPage() {
       >
         <Stack spacing={0.5}>
           <Typography variant="h5" component="h2">
-            Open reminders
+            {labels.openReminders}
           </Typography>
           <Typography color="text.secondary">
-            Upcoming and overdue work that still needs attention.
+            {labels.openRemindersSubtitle}
           </Typography>
         </Stack>
         <Link href="/reminders">
-          <Button variant="outlined">View all reminders</Button>
+          <Button variant="outlined">{labels.viewAllReminders}</Button>
         </Link>
       </Stack>
 
       <ReminderList
         reminders={reminders}
-        emptyTitle="No open reminders"
-        emptyDescription="Create reminders for readings, payment due dates, or custom tasks."
+        emptyTitle={labels.noOpenReminders}
+        emptyDescription={labels.noOpenRemindersDescription}
       />
     </Stack>
   );
